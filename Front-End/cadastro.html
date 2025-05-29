@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>.END - Cadastro de Dispositivo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header-principal">
+        <h1>.END</h1>
+        <p>Gerência de Dispositivos e Periféricos</p>
+    </header>
+
+    <main>
+        <section class="formulario-container">
+            <h2>Cadastro de Dispositivo</h2>
+
+            <form class="formulario">
+                <label for="tipo">Tipo de Dispositivo:</label>
+                <select id="tipo" name="tipo">
+                    <option value="máquina">Máquina</option>
+                    <option value="monitor">Monitor</option>
+                    <option value="teclado">Teclado</option>
+                    <option value="mouse">Mouse</option>
+                </select>
+
+                <label for="nome">Nome/Modelo:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="descricao">Descrição:</label>
+                <textarea id="descricao" name="descricao" rows="4"></textarea>
+
+                <label for="numeroSerie">Número de Série:</label>
+                <input type="text" id="numeroSerie" name="numeroSerie">
+
+                <button type="submit">Cadastrar</button>
+            </form>
+
+            
+            <div class="voltar">
+                <a href="index.html">← Voltar ao Início</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Sistema de Gestão de Dispositivos</p>
+    </footer>
+</body>
+</html>
