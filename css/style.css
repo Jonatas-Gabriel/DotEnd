@@ -77,7 +77,7 @@ body {
     text-decoration: none;
 }
 .logo {
-    height: 40px;
+    height: 80px;
     margin-right: 10px;
 }
 .logo-text {
@@ -182,17 +182,26 @@ body {
     box-shadow: var(--sombra-card-leve);
 }
 
-
 /* Hero Section */
 .hero-section {
-    background-color: var(--cor-fundo-secao-clara);
-    padding: 60px 0; /* Padding vertical */
-    min-height: calc(100vh - 80px); /* Altura total da tela menos o header */
+    /* Removido background-color: var(--cor-fundo-secao-clara); */
+    padding: 0; /* Removido padding, será interno ao content */
+    /* Garante que o hero ocupe a altura total da viewport, descontando o header */
+    min-height: calc(100vh - 80px);
     display: flex;
     align-items: center;
+    justify-content: center; /* Centraliza o conteúdo hero-content */
     position: relative; /* Para elementos de fundo */
     overflow: hidden; /* Para os shapes não vazarem feio */
+    /* Nova imagem de fundo que você pediu */
+    background-image: url('Images/Gemini_Generated_Image_saftonsaftonsaft.png');
+    background-size: cover; /* Faz a imagem cobrir toda a área */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita repetição da imagem */
+    /* Adiciona um efeito de sobreposição para melhorar a legibilidade do texto */
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.4); /* Escurece a imagem sutilmente */
 }
+
 /* Elementos gráficos de fundo (opcional) */
 .hero-shape {
     position: absolute;
@@ -216,6 +225,11 @@ body {
     gap: 3rem;
     position: relative; /* Para o texto ficar acima dos shapes */
     z-index: 2;
+    /* Fundo semi-transparente para o conteúdo, garantindo legibilidade sobre a imagem principal */
+    background-color: rgba(255, 255, 255, 0.9); /* Um pouco mais opaco para o texto */
+    padding: 3rem; /* Aumenta o espaço interno */
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--sombra-padrao); /* Adiciona uma sombra para destaque */
 }
 .hero-text h1 {
     font-family: var(--font-titulos);
@@ -237,13 +251,16 @@ body {
     max-width: 100%;
     height: auto;
     max-height: 450px; /* Limita a altura da ilustração */
+    border-radius: var(--border-radius-md); /* Borda arredondada para a imagem dentro do hero-content */
+    box-shadow: var(--sombra-card-leve); /* Sombra para a imagem */
 }
 
 /* Seções Genéricas */
 .section-padding { padding: 80px 0; }
 .section-padding:nth-child(even) { background-color: var(--cor-fundo-secao-clara); }
 .section-padding:nth-child(odd) { background-color: var(--cor-principal-light); } /* Verde pastel para seções ímpares */
-#hero + .section-padding { background-color: var(--cor-fundo-geral); } /* Primeira seção após hero com fundo diferente */
+/* Removido: #hero + .section-padding { background-color: var(--cor-fundo-geral); } */
+/* A primeira seção após o hero agora terá seu próprio background definido pelo CSS geral */
 
 .section-title {
     text-align: center;
@@ -480,7 +497,7 @@ footer p { margin-bottom: 0.5rem; }
         text-align: center;
     }
     .hero-text { order: 2; } /* Texto abaixo da imagem em telas menores */
-    .hero-image-container { order: 1; margin-bottom: 2rem; }
+    .hero-image-container { margin-bottom: 2rem; }
     .hero-text h1 { font-size: 2.4rem; }
     .hero-text p { max-width: 100%; }
 
@@ -493,7 +510,7 @@ footer p { margin-bottom: 0.5rem; }
 @media (max-width: 768px) {
     body { padding-top: 70px; } /* Se o header diminuir */
     .header-principal.homepage-header { height: 70px; }
-    .logo { height: 35px; }
+    .logo { height: 70px; }
     .logo-text { font-size: 1.5rem; }
     .main-nav { display: none; } /* Esconder nav e implementar menu hambúrguer (não incluído aqui) */
     .btn-login { padding: 8px 18px; font-size: 0.9rem; }
