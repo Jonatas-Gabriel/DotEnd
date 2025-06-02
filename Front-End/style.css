@@ -1,139 +1,510 @@
+/* css/style.css */
 :root {
-    --cor-principal: #009688; /* Azul-esverdeado bonito */
-    --cor-header: #004d40dc; /* Um verde-azulado escuro bonito */
-    --cor-fundo-card: rgba(255, 255, 255, 0.85);
-    --cor-hover: #f1fdfc;
+    --cor-principal: #009688; /* Verde DotEnd (mais vibrante) */
+    --cor-principal-hover: #00796b; /* Tom mais escuro para hover */
+    --cor-principal-light: #e0f2f1; /* Tom pastel do verde para fundos sutis */
+    --cor-secundaria: #004d40; /* Verde escuro para textos ou acentos */
+    --cor-destaque: #ffc107; /* Amarelo/Laranja para CTAs secundários ou alertas (opcional) */
+
+    --cor-header-bg: #ffffff;
+    --cor-header-texto: #37474f; /* Azul acinzentado escuro para texto do header */
+    --cor-header-borda: #e0e0e0;
+
+    --cor-fundo-geral: #f7f9fa; /* Cinza muito claro, quase branco */
+    --cor-fundo-secao-clara: #ffffff;
+
+    --cor-texto-headings: #263238; /* Azul acinzentado bem escuro para títulos */
+    --cor-texto-paragrafo: #546e7a; /* Azul acinzentado para parágrafos */
+    --cor-texto-claro: #ffffff;
+
+    --sombra-padrao: 0 4px 15px rgba(0, 0, 0, 0.07);
+    --sombra-hover: 0 6px 20px rgba(0, 0, 0, 0.1);
+    --sombra-card-leve: 0 2px 8px rgba(0,0,0,0.05);
+
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+
+    --font-principal: 'Roboto', 'Segoe UI', Arial, sans-serif;
+    --font-titulos: 'Montserrat', 'Segoe UI', Arial, sans-serif; /* Fonte mais marcante para títulos */
 }
+
+/* Importar fontes do Google Fonts (opcional, mas recomendado para Montserrat e Roboto) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap');
 
 body {
-    background-color: #e0f2f1; /* Fundo azul-esverdeado bem clarinho */
-    color: #333;
+    font-family: var(--font-principal);
+    background-color: var(--cor-fundo-geral);
+    color: var(--cor-texto-paragrafo);
+    line-height: 1.7;
+    margin: 0;
+    padding-top: 80px; /* Espaço para o header fixo */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-.header-principal {
-    background-color: var(--cor-header);
+.container {
+    width: 90%;
+    max-width: 1140px; /* Um pouco mais largo */
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Header Fixo */
+.header-principal.homepage-header {
+    background-color: var(--cor-header-bg);
+    padding: 0; /* Padding será no container */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--cor-header-borda);
+    height: 80px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.homepage-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.logo {
+    height: 40px;
+    margin-right: 10px;
+}
+.logo-text {
+    font-family: var(--font-titulos);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--cor-principal); /* Nome com a cor principal */
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.main-nav li { margin-left: 28px; }
+.main-nav a {
+    text-decoration: none;
+    color: var(--cor-header-texto);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 10px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+.main-nav a::after { /* Efeito de sublinhado animado */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--cor-principal);
+    transition: width 0.3s ease;
+}
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
+}
+.main-nav a:hover,
+.main-nav a.active {
     color: var(--cor-principal);
-    padding: 2rem 1rem;
+}
+
+/* Botões Globais */
+.btn {
+    padding: 12px 28px;
+    text-decoration: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: 1px solid transparent;
+    cursor: pointer;
     text-align: center;
 }
-
-.header-principal h1 {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
-    letter-spacing: 2px;
+.btn-primary {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    border-color: var(--cor-principal);
+}
+.btn-primary:hover {
+    background-color: var(--cor-principal-hover);
+    border-color: var(--cor-principal-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 150, 136, 0.3);
+}
+.btn-secondary { /* Botão com outline da cor principal */
+    background-color: transparent;
+    color: var(--cor-principal);
+    border: 2px solid var(--cor-principal);
+}
+.btn-secondary:hover {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+}
+.btn-outline { /* Variação de outline */
+    background-color: transparent;
+    color: var(--cor-secundaria);
+    border: 2px solid var(--cor-principal-light);
+}
+.btn-outline:hover {
+    color: var(--cor-principal);
+    border-color: var(--cor-principal);
+}
+.btn-lg { padding: 15px 35px; font-size: 1.1rem; }
+.btn-login { /* Botão de login específico, pode ser igual ao primário */
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+}
+.btn-login:hover {
+    background-color: var(--cor-principal-hover);
+}
+.btn-light {
+    background-color: var(--cor-fundo-secao-clara);
+    color: var(--cor-principal);
+    border: 1px solid var(--cor-header-borda);
+}
+.btn-light:hover {
+    background-color: #f0f0f0;
+    box-shadow: var(--sombra-card-leve);
 }
 
-.header-principal p {
-    font-size: 1.2rem;
-    color: #ccc;
+
+/* Hero Section */
+.hero-section {
+    background-color: var(--cor-fundo-secao-clara);
+    padding: 60px 0; /* Padding vertical */
+    min-height: calc(100vh - 80px); /* Altura total da tela menos o header */
+    display: flex;
+    align-items: center;
+    position: relative; /* Para elementos de fundo */
+    overflow: hidden; /* Para os shapes não vazarem feio */
+}
+/* Elementos gráficos de fundo (opcional) */
+.hero-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.08; /* Bem sutil */
+    background-color: var(--cor-principal);
+}
+.hero-shape-1 {
+    width: 300px; height: 300px;
+    top: -100px; left: -100px;
+}
+.hero-shape-2 {
+    width: 400px; height: 400px;
+    bottom: -150px; right: -150px;
 }
 
-.cards {
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas */
+    align-items: center;
+    gap: 3rem;
+    position: relative; /* Para o texto ficar acima dos shapes */
+    z-index: 2;
+}
+.hero-text h1 {
+    font-family: var(--font-titulos);
+    font-size: 2.8rem; /* Ajuste conforme necessário */
+    font-weight: 700;
+    color: var(--cor-texto-headings);
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+}
+.hero-text p {
+    font-size: 1.15rem;
+    margin-bottom: 2.5rem;
+    color: var(--cor-texto-paragrafo);
+    max-width: 500px; /* Para não ficar muito largo */
+}
+.hero-cta .btn { margin-right: 1rem; margin-bottom: 1rem; }
+.hero-image-container { text-align: center; }
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 450px; /* Limita a altura da ilustração */
+}
+
+/* Seções Genéricas */
+.section-padding { padding: 80px 0; }
+.section-padding:nth-child(even) { background-color: var(--cor-fundo-secao-clara); }
+.section-padding:nth-child(odd) { background-color: var(--cor-principal-light); } /* Verde pastel para seções ímpares */
+#hero + .section-padding { background-color: var(--cor-fundo-geral); } /* Primeira seção após hero com fundo diferente */
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.section-title h2 {
+    font-family: var(--font-titulos);
+    font-size: 2.4rem;
+    color: var(--cor-texto-headings);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+.section-title h2::after { /* Linha decorativa abaixo do título */
+    content: '';
+    display: block;
+    width: 70px;
+    height: 4px;
+    background-color: var(--cor-principal);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+.section-title p {
+    font-size: 1.1rem;
+    color: var(--cor-texto-paragrafo);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Proposta Section */
+.proposta-section { background-color: var(--cor-fundo-secao-clara); } /* Fundo branco para esta */
+.proposta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: center;
+    gap: 3rem;
+}
+.proposta-image-container img {
+    width: 100%;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--sombra-padrao);
+}
+.proposta-text-content h3 {
+    font-family: var(--font-titulos);
+    font-size: 1.8rem;
+    color: var(--cor-texto-headings);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+.proposta-text-content p { margin-bottom: 1.5rem; }
+.proposta-text-content ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 2rem;
+}
+.proposta-text-content ul li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+}
+.proposta-text-content ul li i {
+    color: var(--cor-principal);
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Features Section (Recursos) */
+.features-section { background-color: var(--cor-principal-light); } /* Fundo verde pastel */
+.features-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+.feature-card {
+    background-color: var(--cor-fundo-secao-clara);
+    padding: 2.5rem 2rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--sombra-card-leve);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid var(--cor-principal); /* Borda superior verde */
+}
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--sombra-hover);
+}
+.feature-card .feature-icon {
+    font-size: 2.8rem;
+    color: var(--cor-principal);
+    margin-bottom: 1.5rem;
+    display: inline-block; /* Para centralizar se necessário */
+    background-color: var(--cor-principal-light); /* Círculo de fundo para o ícone */
+    width: 70px;
+    height: 70px;
+    line-height: 70px; /* Centraliza o ícone verticalmente */
+    border-radius: 50%;
+}
+.feature-card h3 {
+    font-family: var(--font-titulos);
+    font-size: 1.4rem;
+    color: var(--cor-texto-headings);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+.feature-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Diferenciais Section */
+.diferenciais-section { background-color: var(--cor-fundo-secao-clara); }
+.diferenciais-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    padding: 3rem;
 }
-
-.card {
-    background-color: var(--cor-fundo-card);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.diferencial-item {
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1.5rem;
 }
-
-.card-interativa:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    background-color: var(--cor-hover);
-}
-
-.card a {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
+.diferencial-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
     background-color: var(--cor-principal);
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+    color: var(--cor-texto-claro);
+    font-size: 2.2rem;
+    margin: 0 auto 1.5rem auto;
+    display: flex; /* Para centralizar ícone dentro */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 150, 136, 0.3);
+    transition: transform 0.3s ease;
+}
+.diferencial-item:hover .diferencial-icon-wrapper {
+    transform: scale(1.1);
+}
+.diferencial-item h3 {
+    font-family: var(--font-titulos);
+    font-size: 1.3rem;
+    color: var(--cor-texto-headings);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
-.card a:hover {
-    background-color: #00796b; /* Tom mais escuro no hover */
+/* CTA Section */
+.cta-section {
+    background-color: var(--cor-principal); /* Fundo verde para o CTA principal */
+    color: var(--cor-texto-claro);
+    text-align: center;
+    padding: 70px 0;
+}
+.cta-section .section-title h2,
+.cta-section .section-title p {
+    color: var(--cor-texto-claro); /* Texto claro sobre fundo verde */
+}
+.cta-section .section-title h2::after {
+    background-color: var(--cor-texto-claro); /* Linha decorativa clara */
+}
+.cta-section .btn { margin: 0.5rem; }
+.btn-cta.btn-primary { /* Se precisar de estilo específico para o botão primário no CTA */
+    background-color: var(--cor-texto-claro);
+    color: var(--cor-principal);
+    border-color: var(--cor-texto-claro);
+}
+.btn-cta.btn-primary:hover {
+    background-color: #f0f0f0;
+    border-color: #f0f0f0;
+    color: var(--cor-principal-hover);
+}
+.btn-cta.btn-light { /* Botão secundário no CTA */
+    background-color: transparent;
+    color: var(--cor-texto-claro);
+    border: 2px solid var(--cor-texto-claro);
+}
+.btn-cta.btn-light:hover {
+    background-color: var(--cor-texto-claro);
+    color: var(--cor-principal);
 }
 
+
+/* Contact Section */
+.contact-section { background-color: var(--cor-fundo-geral); }
+.contact-form {
+    max-width: 700px; /* Formulário um pouco mais largo */
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas para nome e email */
+    gap: 1.5rem;
+}
+.form-group { /* Container para label + input se necessário no futuro */
+    /* Por enquanto, só para agrupar os inputs no grid */
+}
+.form-group.full-width {
+    grid-column: 1 / -1; /* Ocupa todas as colunas */
+}
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--cor-header-borda);
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--cor-principal);
+    box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.15);
+    outline: none;
+}
+.contact-form button {
+    width: auto; /* Para não ocupar 100% se for input */
+    min-width: 200px; /* Largura mínima */
+    /* Estilos de .btn e .btn-primary já aplicados */
+}
+
+/* Footer */
 footer {
     text-align: center;
-    padding: 1rem;
-    background-color: #eee;
-    margin-top: 2rem;
+    padding: 3rem 1rem;
+    background-color: var(--cor-secundaria); /* Footer com verde escuro */
+    color: var(--cor-principal-light); /* Texto claro sobre fundo escuro */
     font-size: 0.9rem;
 }
-.formulario-container {
-    background-color: var(--cor-fundo-card);
-    max-width: 600px;
-    margin: 3rem auto;
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    text-align: center;
+footer p { margin-bottom: 0.5rem; }
+
+/* Media Queries para Responsividade (Exemplos básicos) */
+@media (max-width: 992px) {
+    .hero-content {
+        grid-template-columns: 1fr; /* Empilha na Hero */
+        text-align: center;
+    }
+    .hero-text { order: 2; } /* Texto abaixo da imagem em telas menores */
+    .hero-image-container { order: 1; margin-bottom: 2rem; }
+    .hero-text h1 { font-size: 2.4rem; }
+    .hero-text p { max-width: 100%; }
+
+    .proposta-grid {
+        grid-template-columns: 1fr; /* Empilha */
+    }
+    .proposta-image-container { margin-bottom: 2rem; }
 }
 
-.formulario-container h2 {
-    margin-bottom: 2rem;
-    color: var(--cor-principal);
-}
+@media (max-width: 768px) {
+    body { padding-top: 70px; } /* Se o header diminuir */
+    .header-principal.homepage-header { height: 70px; }
+    .logo { height: 35px; }
+    .logo-text { font-size: 1.5rem; }
+    .main-nav { display: none; } /* Esconder nav e implementar menu hambúrguer (não incluído aqui) */
+    .btn-login { padding: 8px 18px; font-size: 0.9rem; }
 
-form.formulario label {
-    display: block;
-    margin-top: 1.2rem;
-    font-weight: bold;
-    text-align: left;
-}
+    .hero-section { padding: 40px 0; min-height: auto; }
+    .hero-text h1 { font-size: 2rem; }
+    .hero-text p { font-size: 1rem; }
+    .btn-lg { padding: 12px 25px; font-size: 1rem; }
 
-form.formulario input,
-form.formulario select,
-form.formulario textarea {
-    width: 100%;
-    padding: 0.75rem;
-    margin-top: 0.5rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    margin-bottom: 1rem;
-}
+    .section-padding { padding: 60px 0; }
+    .section-title h2 { font-size: 2rem; }
 
-form.formulario button {
-    margin-top: 1.5rem;
-    padding: 0.75rem 1rem;
-    background-color: var(--cor-principal);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    width: 100%;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-form.formulario button:hover {
-    background-color: #00796b;
-}
-
-.voltar {
-    margin-top: 1.5rem;
-}
-
-.voltar a {
-    color: var(--cor-principal);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.voltar a:hover {
-    text-decoration: underline;
+    .contact-form { grid-template-columns: 1fr; } /* Uma coluna para o form */
 }

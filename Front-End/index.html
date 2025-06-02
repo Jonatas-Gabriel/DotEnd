@@ -1,40 +1,162 @@
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <title>.END - Gerência de Dispositivos</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <header class="header-principal">
-            <h1>.END</h1>
-            <p>Gerência de Dispositivos e Periféricos</p>
-        </header>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DotEnd - Gerenciamento Inteligente de Ativos de TI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="header-principal homepage-header">
+        <div class="container">
+            <a href="index.html" class="logo-link"> <img src="images/logo.png" alt="DotEnd Logo" class="logo">
+                <span class="logo-text">DotEnd</span> </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li> <li><a href="#proposta">Proposta</a></li> <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#diferenciais">Diferenciais</a></li> <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="btn btn-login">Login</a>
+        </div>
+    </header>
 
-        <main>
-            <section class="cards">
-                <div class="card card-interativa">
-                    <h2>Cadastro de Equipamentos</h2>
-                    <p>Registre novos dispositivos na base de dados.</p>
-                    <a href="cadastro.html">Cadastrar</a>
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-shape hero-shape-1"></div>
+            <div class="hero-shape hero-shape-2"></div>
+
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>Transforme a Gestão de Ativos de TI na Sua Organização</h1>
+                    <p>DotEnd oferece clareza, controle e eficiência para o seu inventário tecnológico. Simplifique processos, otimize recursos e tome decisões mais inteligentes.</p>
+                    <div class="hero-cta">
+                        <a href="servicos.html" class="btn btn-primary btn-lg">Descubra Nossos Serviços</a>
+                        <a href="#recursos" class="btn btn-secondary btn-lg">Ver Recursos</a>
+                    </div>
                 </div>
-
-                <div class="card card-interativa">
-                    <h2>Lista de Equipamentos</h2>
-                    <p>Veja e gerencie todos os equipamentos cadastrados.</p>
-                    <a href="lista_equipamentos.html">Visualizar Lista</a>
+                <div class="hero-image-container">
+                    <img src="images/hero-illustration.png" alt="Gerenciamento de Ativos de TI" class="hero-image">
                 </div>
+            </div>
+        </section>
 
-                <div class="card card-interativa">
-                    <h2>Alocação de Equipamentos</h2>
-                    <p>Alocar dispositivos para setores e usuários.</p>
-                    <a href="alocar_equipamentos.html">Fazer Alocação</a>
+        <section id="proposta" class="proposta-section section-padding">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Nossa Proposta de Valor</h2>
+                    <p>Entendemos os desafios do gerenciamento de ativos de TI. O DotEnd foi desenvolvido para ser a solução que centraliza suas informações, automatiza tarefas e oferece insights valiosos.</p>
                 </div>
-            </section>
-        </main>
+                <div class="proposta-grid">
+                    <div class="proposta-image-container">
+                        <img src="images/proposta-dotend.jpg" alt="Equipe DotEnd Organizando Ativos">
+                    </div>
+                    <div class="proposta-text-content">
+                        <h3>Da Complexidade à Clareza</h3>
+                        <p>Cansado de planilhas intermináveis e informações descentralizadas? O DotEnd traz uma interface intuitiva e dashboards claros para que você tenha o controle total dos seus ativos, desde a aquisição até o descarte.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Visibilidade completa do ciclo de vida dos ativos.</li>
+                            <li><i class="fas fa-check-circle"></i> Redução de perdas e otimização de custos.</li>
+                            <li><i class="fas fa-check-circle"></i> Facilidade na tomada de decisões estratégicas.</li>
+                        </ul>
+                        <a href="servicos.html" class="btn btn-outline">Conheça as Funcionalidades</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <footer>
-            <p>© 2025 Sistema de Gestão de Dispositivos</p>
-        </footer>
-    </body>
-    </html>
+        <section id="recursos" class="features-section section-padding">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Recursos Essenciais para Você</h2>
+                    <p>Ferramentas poderosas e fáceis de usar para um gerenciamento de TI eficaz.</p>
+                </div>
+                <div id="dynamic-features-cards" class="features-grid-container">
+                    </div>
+            </div>
+        </section>
+
+        <section id="diferenciais" class="diferenciais-section section-padding">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Por que Escolher o DotEnd?</h2>
+                    <p>Nossos diferenciais são pensados para otimizar seu dia a dia.</p>
+                </div>
+                <div class="diferenciais-grid">
+                    <div class="diferencial-item">
+                        <div class="diferencial-icon-wrapper">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Interface Intuitiva</h3>
+                        <p>Design limpo e navegação simplificada para que você encontre o que precisa rapidamente, sem curvas de aprendizado íngremes.</p>
+                    </div>
+                    <div class="diferencial-item">
+                        <div class="diferencial-icon-wrapper">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Foco no Essencial</h3>
+                        <p>Concentramos nas funcionalidades chave que realmente importam para um gerenciamento de ativos eficiente, sem complexidade desnecessária.</p>
+                    </div>
+                    <div class="diferencial-item">
+                        <div class="diferencial-icon-wrapper">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Segurança e Confiabilidade</h3>
+                        <p>Seus dados de ativos são importantes. Utilizamos práticas modernas para garantir a segurança e a integridade das suas informações.</p>
+                    </div>
+                     <div class="diferencial-item">
+                        <div class="diferencial-icon-wrapper">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>Pronto para o Futuro</h3>
+                        <p>Desenvolvido com tecnologias atuais, o DotEnd está preparado para evoluir e se adaptar às novas demandas do gerenciamento de TI.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta" class="cta-section section-padding">
+            <div class="container">
+                <h2>Pronto para Simplificar a Gestão dos Seus Ativos de TI?</h2>
+                <p>Experimente a diferença que o DotEnd pode fazer na sua organização. Entre em contato ou explore nossos serviços.</p>
+                <a href="servicos.html" class="btn btn-primary btn-cta">Ver Nossos Serviços</a>
+                <a href="#contato" class="btn btn-light btn-cta">Fale Conosco</a>
+            </div>
+        </section>
+
+        <section id="contato" class="contact-section section-padding">
+            <div class="container">
+                 <div class="section-title">
+                    <h2>Entre em Contato</h2>
+                    <p>Tem alguma dúvida ou quer saber mais? Nossa equipe está pronta para ajudar!</p>
+                </div>
+                <form id="contact-form" class="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Seu Nome Completo" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Seu Melhor Email" required>
+                    </div>
+                     <div class="form-group">
+                        <input type="text" name="subject" placeholder="Assunto" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <textarea name="message" placeholder="Sua Mensagem Detalhada" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="currentYear"></span> DotEnd - Gerenciamento de Ativos de TI. Todos os direitos reservados.</p>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
