@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const assetForm = document.getElementById('asset-form');
 
     if (assetForm) {
-        assetForm.addEventListener('submit', (event) => {
+        assetForm.addEventListener('submit', async (event) => { // Tornar a função assíncrona
             event.preventDefault(); // Impede o envio padrão do formulário
 
             const assetType = document.getElementById('assetType').value;
@@ -14,20 +14,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const assetModel = document.getElementById('assetModel').value;
             const assetStatus = document.getElementById('assetStatus').value;
 
-            const newAsset = {
+            const newAssetData = {
                 name: assetName,
                 description: assetDescription,
-                type: assetType, // Usamos o tipo do formulário para o 'type' do objeto
+                // O 'type' do ativo será usado como o endpoint do JSON-Server,
+                // mas também incluímos no objeto para consistência dos dados.
+                type: assetType,
                 model: assetModel,
                 status: assetStatus
                 // Adicione outros campos do formulário aqui
             };
 
             if (assetType) {
-                const addedAsset = addAsset(assetType, newAsset);
-                alert(`Equipamento "${addedAsset.name}" (${addedAsset.type}) cadastrado com sucesso! ID: ${addedAsset.id}`);
-                assetForm.reset(); // Limpa o formulário
-                window.location.href = 'lista_equipamentos.html'; // Redireciona para a lista
+                try {
+                    const addedAsset = await addAsset(assetType, newAssetData); // Chama a função assíncrona
+                    alert(`Equipamento "${addedAsset.name}" (${addedAsset.type}) cadastrado com sucesso! ID: ${addedAsset.id}`);
+                    assetForm.reset(); // Limpa o formulário
+                    window.location.href = 'lista_equipamentos.html'; // Redireciona para a lista
+                } catch (error) {
+                    console.error("Erro ao cadastrar equipamento:", error);
+                    alert("Erro ao cadastrar equipamento. Verifique o console para mais detalhes.");
+                }
             } else {
                 alert('Por favor, selecione um tipo de ativo.');
             }

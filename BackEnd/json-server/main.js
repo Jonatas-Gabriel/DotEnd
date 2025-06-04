@@ -1,84 +1,108 @@
 // js/main.js
-import { initialDatabase } from './db.js'; // Importa os dados iniciais
 
-// Função para obter dados do localStorage ou inicializar com dados padrão
-function getDatabase() {
-    const storedData = localStorage.getItem('itAssetsDatabase');
-    if (storedData) {
-        return JSON.parse(storedData);
-    }
-    // Se não houver dados no localStorage, use os dados iniciais e salve-os
-    localStorage.setItem('itAssetsDatabase', JSON.stringify(initialDatabase));
-    return initialDatabase;
-}
+// URL base do seu JSON-Server. Ele geralmente roda na porta 3000 por padrão.
+// O nome do recurso (ex: 'Computer', 'Printer') será o endpoint.
+const JSON_SERVER_BASE_URL = 'http://localhost:3000/';
 
-// Função para salvar o estado atual do banco de dados no localStorage
-function saveDatabase(db) {
-    localStorage.setItem('itAssetsDatabase', JSON.stringify(db));
-}
-
-let database = getDatabase(); // Carrega o banco de dados
-
-// --- Funções CRUD (simuladas com localStorage) ---
+// --- Funções CRUD usando Fetch ---
 
 // READ: Obter todos os ativos de um tipo específico
-export function getAssets(type) {
-    return database[type] || [];
+export async function getAssets(type) {
+    try {
+        const response = await fetch(`${JSON_SERVER_BASE_URL}${type}`);
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar ${type}: ${response.status} ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(`Erro ao obter ativos do tipo ${type}:`, error);
+        return []; // Retorna um array vazio em caso de erro
+    }
 }
 
 // READ: Obter um ativo específico por tipo e ID
-export function getAssetById(type, id) {
-    const assets = database[type];
-    if (assets) {
-        return assets.find(asset => asset.id === id);
+export async function getAssetById(type, id) {
+    try {
+        const response = await fetch(`${JSON_SERVER_BASE_URL}${type}/${id}`);
+        if (!response.ok) {
+            if (response.status === 404) {
+                console.warn(`Ativo com ID ${id} do tipo ${type} não encontrado.`);
+                return null;
+            }
+            throw new Error(`Erro ao obter ativo ${id} de ${type}: ${response.status} ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(`Erro ao obter ativo por ID (${id}, ${type}):`, error);
+        return null;
     }
-    return null;
 }
 
 // CREATE: Adicionar um novo ativo
-export function addAsset(type, newAssetData) {
-    if (!database[type]) {
-        database[type] = [];
+export async function addAsset(type, newAssetData) {
+    try {
+        const response = await fetch(`${JSON_SERVER_BASE_URL}${type}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newAssetData)
+        });
+
+        if (!response.ok) {
+            const errorBody = await response.text(); // Pega o texto da resposta para depuração
+            throw new Error(`Erro ao adicionar ativo: ${response.status} ${response.statusText} - ${errorBody}`);
+        }
+        return await response.json(); // JSON-Server retorna o novo recurso com o ID
+    } catch (error) {
+        console.error('Erro na adição de ativo:', error);
+        throw error; // Re-lança para que o chamador possa lidar com o erro
     }
-    // Gera um novo ID simples (em um backend, o BD faria isso)
-    const newId = database[type].length > 0 ? Math.max(...database[type].map(a => a.id)) + 1 : 1;
-    const assetToAdd = { id: newId, ...newAssetData };
-    database[type].push(assetToAdd);
-    saveDatabase(database); // Salva a alteração no localStorage
-    return assetToAdd;
 }
 
 // UPDATE: Atualizar um ativo existente
-export function updateAsset(type, id, updates) {
-    const assets = database[type];
-    if (assets) {
-        const index = assets.findIndex(asset => asset.id === id);
-        if (index !== -1) {
-            Object.assign(assets[index], updates);
-            saveDatabase(database); // Salva a alteração no localStorage
-            return assets[index];
+export async function updateAsset(type, id, updates) {
+    try {
+        const response = await fetch(`${JSON_SERVER_BASE_URL}${type}/${id}`, {
+            method: 'PUT', // PUT substitui o recurso completo. PATCH atualiza parcialmente. Use PUT para este exemplo.
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updates)
+        });
+
+        if (!response.ok) {
+            const errorBody = await response.text();
+            throw new Error(`Erro ao atualizar ativo: ${response.status} ${response.statusText} - ${errorBody}`);
         }
+        return await response.json();
+    } catch (error) {
+        console.error('Erro na atualização de ativo:', error);
+        throw error;
     }
-    return null; // Ativo não encontrado
 }
 
 // DELETE: Excluir um ativo
-export function deleteAsset(type, id) {
-    const assets = database[type];
-    if (assets) {
-        const initialLength = assets.length;
-        database[type] = assets.filter(asset => asset.id !== id);
-        if (database[type].length < initialLength) {
-            saveDatabase(database); // Salva a alteração no localStorage
-            return true; // Excluído com sucesso
+export async function deleteAsset(type, id) {
+    try {
+        const response = await fetch(`${JSON_SERVER_BASE_URL}${type}/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) {
+            const errorBody = await response.text();
+            throw new Error(`Erro ao excluir ativo: ${response.status} ${response.statusText} - ${errorBody}`);
         }
+        return true; // JSON-Server geralmente retorna um objeto vazio ou 200 OK
+    } catch (error) {
+        console.error('Erro na exclusão de ativo:', error);
+        throw error;
     }
-    return false; // Ativo não encontrado
 }
 
-// --- Funções de inicialização e eventos globais ---
+// --- Funções de inicialização e eventos globais para index.html ---
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => { // Usar async aqui para chamar getAssets
     // Atualiza o ano no footer
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
@@ -95,28 +119,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Exemplo de como você renderizaria os cards de recursos (seção #recursos)
-    // Usaremos os dados da categoria 'Computer' ou similar para popular.
+    // Renderizar os cards de recursos (seção #recursos) dinamicamente
     const dynamicFeaturesContainer = document.getElementById('dynamic-features-cards');
     if (dynamicFeaturesContainer) {
-        const categories = Object.keys(database); // Pega todas as categorias de ativos
-        
         dynamicFeaturesContainer.innerHTML = ''; // Limpa o conteúdo existente
 
-        categories.forEach(categoryKey => {
-            const assetsOfType = getAssets(categoryKey);
-            if (assetsOfType.length > 0) {
-                 const firstAsset = assetsOfType[0]; // Pega o primeiro ativo de cada categoria para representar
-                 const card = document.createElement('div');
-                 card.className = 'feature-card';
-                 card.innerHTML = `
-                     <div class="feature-icon"><i class="fas fa-desktop"></i></div> <h3>${categoryKey}s</h3>
-                     <p>Gerencie ${assetsOfType.length} ${categoryKey.toLowerCase()}s como ${firstAsset.name} e outros dispositivos.</p>
-                     <p>Status: ${firstAsset.status}</p>
-                 `;
-                 dynamicFeaturesContainer.appendChild(card);
+        // Precisamos obter a lista de tipos de ativos do JSON-Server
+        // Isso pode ser feito fazendo uma requisição ao endpoint raiz ou tendo uma lista de tipos pré-definida
+        // Para simplificar, vamos usar uma lista pré-definida ou hardcoded aqui para os cards.
+        const assetTypes = [
+            'Computer', 'Printer', 'Projector', 'Monitor', 'Scanner',
+            'NetworkDevice', 'StorageDevice', 'Accessories'
+        ];
+
+        for (const type of assetTypes) {
+            try {
+                const assetsOfType = await getAssets(type); // Busca os ativos para cada tipo
+                if (assetsOfType.length > 0) {
+                    const firstAsset = assetsOfType[0]; // Pega o primeiro ativo para representação
+                    const card = document.createElement('div');
+                    card.className = 'feature-card';
+                    card.innerHTML = `
+                        <div class="feature-icon"><i class="fas fa-desktop"></i></div>
+                        <h3>${type}s</h3>
+                        <p>Gerencie ${assetsOfType.length} ${type.toLowerCase()}s como ${firstAsset.name} e outros dispositivos.</p>
+                        <p>Status: ${firstAsset.status}</p>
+                    `;
+                    dynamicFeaturesContainer.appendChild(card);
+                }
+            } catch (error) {
+                console.error(`Não foi possível carregar dados para ${type}:`, error);
+                // Pode adicionar um card de erro ou pular este tipo
             }
-        });
+        }
         // Adicionar um card "Ver Tudo"
         const viewAllCard = document.createElement('div');
         viewAllCard.className = 'feature-card';
@@ -129,6 +164,3 @@ document.addEventListener('DOMContentLoaded', () => {
         dynamicFeaturesContainer.appendChild(viewAllCard);
     }
 });
-
-// Exporta o banco de dados atualizado para ser usado por outros scripts (como servicos.js, cadastro.js, lista_equipamentos.js)
-export { database };

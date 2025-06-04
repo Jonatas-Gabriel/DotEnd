@@ -1,5 +1,5 @@
 // js/lista_equipamentos.js
-import { database, getAssets, updateAsset, deleteAsset } from './main.js'; // Importa o db e funções CRUD
+import { getAssets, getAssetById, updateAsset, deleteAsset } from './main.js'; // Importa as funções CRUD
 
 document.addEventListener('DOMContentLoaded', () => {
     const assetListContainer = document.getElementById('asset-list-container');
@@ -11,16 +11,31 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentEditingAsset = null; // Armazena o ativo que está sendo editado
 
     // Função para renderizar a lista de ativos
-    function renderAssetList(filter = 'All') {
+    async function renderAssetList(filter = 'All') { // Tornar a função assíncrona
         assetListContainer.innerHTML = ''; // Limpa a lista existente
         let allAssets = [];
 
-        if (filter === 'All') {
-            for (const type in database) {
-                allAssets = allAssets.concat(getAssets(type));
+        try {
+            if (filter === 'All') {
+                // Obter a lista de tipos de ativos que o JSON-Server pode ter
+                // Uma forma mais robusta seria ter um endpoint de "tipos" no backend.
+                // Por agora, vamos usar uma lista fixa para os tipos presentes no seu db.json.
+                const allTypes = [
+                    'Computer', 'Printer', 'Projector', 'Monitor', 'Scanner',
+                    'NetworkDevice', 'StorageDevice', 'Accessories'
+                ];
+                for (const type of allTypes) {
+                    const assetsOfType = await getAssets(type);
+                    allAssets = allAssets.concat(assetsOfType.map(a => ({...a, type: type}))); // Adiciona o tipo ao objeto
+                }
+            } else {
+                allAssets = await getAssets(filter);
+                allAssets = allAssets.map(a => ({...a, type: filter})); // Garante que o tipo está no objeto
             }
-        } else {
-            allAssets = getAssets(filter);
+        } catch (error) {
+            console.error('Erro ao carregar ativos:', error);
+            assetListContainer.innerHTML = '<p>Erro ao carregar equipamentos. Por favor, tente novamente.</p>';
+            return;
         }
 
         if (allAssets.length === 0) {
@@ -29,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const table = document.createElement('table');
-        table.className = 'asset-table'; // Adicione uma classe para estilização via CSS
+        table.className = 'asset-table';
 
         // Cabeçalho da tabela
         table.innerHTML = `
@@ -66,6 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     </button>
                 </td>
             `;
+            // Adiciona data-label para responsividade da tabela
+            row.querySelectorAll('td').forEach(td => {
+                const header = table.querySelector(`th:nth-child(${td.cellIndex + 1})`).textContent;
+                td.setAttribute('data-label', header);
+            });
             tbody.appendChild(row);
         });
 
@@ -78,17 +98,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Event listener para os botões de Editar e Excluir (delegação de eventos)
-    assetListContainer.addEventListener('click', (event) => {
+    assetListContainer.addEventListener('click', async (event) => { // Tornar assíncrona
         if (event.target.classList.contains('edit-btn') || event.target.closest('.edit-btn')) {
             const btn = event.target.classList.contains('edit-btn') ? event.target : event.target.closest('.edit-btn');
             const id = parseInt(btn.dataset.id);
             const type = btn.dataset.type;
             
-            currentEditingAsset = getAssetById(type, id); // Carrega o ativo para edição
+            try {
+                currentEditingAsset = await getAssetById(type, id); // Carrega o ativo para edição
+            } catch (error) {
+                console.error("Erro ao buscar ativo para edição:", error);
+                alert("Não foi possível carregar o ativo para edição.");
+                return;
+            }
 
             if (currentEditingAsset) {
                 document.getElementById('edit-asset-id').value = currentEditingAsset.id;
-                document.getElementById('edit-asset-original-type').value = currentEditingAsset.type; // Guarda o tipo original
+                document.getElementById('edit-asset-original-type').value = currentEditingAsset.type;
                 document.getElementById('edit-asset-name').value = currentEditingAsset.name;
                 document.getElementById('edit-asset-description').value = currentEditingAsset.description || '';
                 document.getElementById('edit-asset-model').value = currentEditingAsset.model || '';
@@ -105,37 +131,49 @@ document.addEventListener('DOMContentLoaded', () => {
             const id = parseInt(btn.dataset.id);
             const type = btn.dataset.type;
 
-            if (confirm(`Tem certeza que deseja excluir o ativo "${getAssetById(type, id)?.name || 'Este ativo'}" do tipo ${type}?`)) {
-                if (deleteAsset(type, id)) {
-                    alert('Ativo excluído com sucesso!');
-                    renderAssetList(filterTypeSelect.value); // Re-renderiza a lista
-                } else {
-                    alert('Erro ao excluir ativo ou ativo não encontrado.');
+            if (confirm(`Tem certeza que deseja excluir o ativo "${(await getAssetById(type, id))?.name || 'Este ativo'}" do tipo ${type}?`)) { // Confirmação síncrona, mas a busca do nome é assíncrona
+                try {
+                    if (await deleteAsset(type, id)) { // Espera a exclusão
+                        alert('Ativo excluído com sucesso!');
+                        renderAssetList(filterTypeSelect.value); // Re-renderiza a lista
+                    } else {
+                        alert('Erro ao excluir ativo ou ativo não encontrado.');
+                    }
+                } catch (error) {
+                    console.error("Erro ao excluir ativo:", error);
+                    alert("Erro ao excluir ativo. Verifique o console para mais detalhes.");
                 }
             }
         }
     });
 
     // Lógica para o formulário de edição do modal
-    editAssetForm.addEventListener('submit', (event) => {
+    editAssetForm.addEventListener('submit', async (event) => { // Tornar assíncrona
         event.preventDefault();
 
         const id = parseInt(document.getElementById('edit-asset-id').value);
-        const originalType = document.getElementById('edit-asset-original-type').value; // Usamos o tipo original
+        const originalType = document.getElementById('edit-asset-original-type').value;
 
         const updatedData = {
+            id: id, // Inclua o ID para o PUT
             name: document.getElementById('edit-asset-name').value,
             description: document.getElementById('edit-asset-description').value,
             model: document.getElementById('edit-asset-model').value,
-            status: document.getElementById('edit-asset-status').value
+            status: document.getElementById('edit-asset-status').value,
+            type: originalType // Garante que o tipo seja mantido, pois o PUT substitui o recurso
         };
 
-        if (updateAsset(originalType, id, updatedData)) {
-            alert('Ativo atualizado com sucesso!');
-            editModal.style.display = 'none'; // Esconde o modal
-            renderAssetList(filterTypeSelect.value); // Re-renderiza a lista
-        } else {
-            alert('Erro ao atualizar ativo ou ativo não encontrado.');
+        try {
+            if (await updateAsset(originalType, id, updatedData)) { // Espera a atualização
+                alert('Ativo atualizado com sucesso!');
+                editModal.style.display = 'none'; // Esconde o modal
+                renderAssetList(filterTypeSelect.value); // Re-renderiza a lista
+            } else {
+                alert('Erro ao atualizar ativo ou ativo não encontrado.');
+            }
+        } catch (error) {
+            console.error("Erro ao atualizar ativo:", error);
+            alert("Erro ao atualizar ativo. Verifique o console para mais detalhes.");
         }
     });
 
