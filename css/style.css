@@ -77,8 +77,15 @@ body {
     text-decoration: none;
 }
 .logo {
-    height: 80px;
+    /* Estilos para deixar a logo circular */
+    width: 80px;  /* Largura igual à altura para formar um círculo */
+    height: 80px; /* Altura original, mas agora combinando com a largura */
+    border-radius: 50%; /* Torna a imagem um círculo */
+    object-fit: cover; /* Garante que a imagem preencha o círculo sem distorcer, cortando as bordas se necessário */
     margin-right: 10px;
+    /* Você pode adicionar uma borda ou sombra aqui se quiser */
+    /* border: 2px solid var(--cor-principal); */
+    /* box-shadow: var(--sombra-card-leve); */
 }
 .logo-text {
     font-family: var(--font-titulos);
@@ -194,7 +201,7 @@ body {
     position: relative; /* Para elementos de fundo */
     overflow: hidden; /* Para os shapes não vazarem feio */
     /* Nova imagem de fundo que você pediu */
-    background-image: url('Images/Gemini_Generated_Image_saftonsaftonsaft.png');
+    background-image: url(../Images/Gemini_Generated_Image_saftonsaftonsaft.png);
     background-size: cover; /* Faz a imagem cobrir toda a área */
     background-position: center; /* Centraliza a imagem */
     background-repeat: no-repeat; /* Evita repetição da imagem */
@@ -415,7 +422,8 @@ body {
 }
 .cta-section .section-title h2,
 .cta-section .section-title p {
-    color: var(--cor-texto-claro); /* Texto claro sobre fundo verde */
+    color: var(--cor-texto-headings); /* Texto claro sobre fundo verde */
+    
 }
 .cta-section .section-title h2::after {
     background-color: var(--cor-texto-claro); /* Linha decorativa clara */
@@ -485,7 +493,7 @@ footer {
     text-align: center;
     padding: 3rem 1rem;
     background-color: var(--cor-secundaria); /* Footer com verde escuro */
-    color: var(--cor-principal-light); /* Texto claro sobre fundo escuro */
+    color: var(--cor-principal-hover); /* Texto claro sobre fundo escuro */
     font-size: 0.9rem;
 }
 footer p { margin-bottom: 0.5rem; }
@@ -510,7 +518,10 @@ footer p { margin-bottom: 0.5rem; }
 @media (max-width: 768px) {
     body { padding-top: 70px; } /* Se o header diminuir */
     .header-principal.homepage-header { height: 70px; }
-    .logo { height: 70px; }
+    .logo { 
+        height: 70px; 
+        width: 70px; /* Ajusta a largura para 70px para responsividade */
+    }
     .logo-text { font-size: 1.5rem; }
     .main-nav { display: none; } /* Esconder nav e implementar menu hambúrguer (não incluído aqui) */
     .btn-login { padding: 8px 18px; font-size: 0.9rem; }
@@ -524,4 +535,114 @@ footer p { margin-bottom: 0.5rem; }
     .section-title h2 { font-size: 2rem; }
 
     .contact-form { grid-template-columns: 1fr; } /* Uma coluna para o form */
+}
+
+/* ... seu código CSS existente ... */
+
+/* Estilos para a tabela de ativos */
+.asset-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: var(--sombra-card-leve);
+    border-radius: var(--border-radius-md);
+    overflow: hidden; /* Garante que as bordas arredondadas funcionem */
+}
+
+.asset-table thead th {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.asset-table tbody tr {
+    background-color: var(--cor-fundo-secao-clara);
+    border-bottom: 1px solid var(--cor-header-borda);
+    transition: background-color 0.3s ease;
+}
+
+.asset-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.asset-table tbody tr:hover {
+    background-color: var(--cor-principal-light);
+}
+
+.asset-table tbody td {
+    padding: 15px;
+    color: var(--cor-texto-paragrafo);
+    font-size: 0.95rem;
+}
+
+/* Estilos para o modal de edição */
+#edit-modal {
+    flex-direction: column; /* Para alinhar o conteúdo do modal */
+    z-index: 1001; /* Garante que o modal fique acima de tudo */
+}
+
+#edit-modal .form-group {
+    margin-bottom: 15px;
+}
+
+#edit-modal input[type="text"],
+#edit-modal select {
+    width: calc(100% - 20px); /* Ajusta para padding */
+    padding: 10px;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--cor-header-borda);
+    font-size: 1rem;
+}
+
+#edit-modal button {
+    margin-right: 10px;
+}
+
+/* Ajustes para telas menores na tabela */
+@media (max-width: 768px) {
+    .asset-table, .asset-table tbody, .asset-table thead, .asset-table th, .asset-table td, .asset-table tr {
+        display: block; /* Força que elementos da tabela se comportem como blocos */
+    }
+
+    .asset-table thead {
+        display: none; /* Esconde o cabeçalho original em telas pequenas */
+    }
+
+    .asset-table tr {
+        margin-bottom: 10px;
+        border: 1px solid var(--cor-header-borda);
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--sombra-card-leve);
+    }
+
+    .asset-table td {
+        border-bottom: 1px solid var(--cor-header-borda);
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .asset-table td::before {
+        content: attr(data-label); /* Usa o atributo data-label como "cabeçalho" */
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--cor-texto-headings);
+    }
+    .asset-table td:last-child {
+        border-bottom: none; /* Remove a borda inferior do último td */
+    }
+
+    .asset-table .edit-btn,
+    .asset-table .delete-btn {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-bottom: 5px;
+    }
 }
