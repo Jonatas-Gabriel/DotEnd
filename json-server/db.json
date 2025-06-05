@@ -1,0 +1,186 @@
+{
+  "Computer": [
+    {
+      "id": 1,
+      "name": "Hp PC",
+      "description": "High-performance device with advanced features",
+      "type": "Desktop",
+      "status": "Available"
+    },
+    {
+      "id": 2,
+      "name": "Samsung PC",
+      "description": "High-performance device with advanced features",
+      "type": "Desktop",
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "name": "Acer PC",
+      "description": "High-performance device with advanced features",
+      "type": "Desktop",
+      "status": "Available"
+    }
+  ],
+  "Printer": [
+    {
+      "id": 1,
+      "name": "HP LaserJet",
+      "description": "High-speed monochrome laser printer",
+      "type": "Laser",
+      "status": "Available"
+    },
+    {
+      "id": 2,
+      "name": "Canon Inkjet",
+      "description": "Versatile inkjet printer for home and office use",
+      "type": "Inkjet",
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "name": "Epson EcoTank",
+      "description": "Cost-effective ink tank printer with high page yield",
+      "type": "Ink Tank",
+      "status": "Available"
+    }
+  ],
+  "Projector": [
+    {
+      "id": 1,
+      "name": "Epson PowerLite",
+      "description": "High-quality projector with bright display",
+      "type": "LCD",
+      "status": "Available"
+    },
+    {
+      "id": 2,
+      "name": "BenQ HT2050A",
+      "description": "Home theater projector with 1080p resolution",
+      "type": "DLP",
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "name": "ViewSonic PJD7720HD",
+      "description": "Versatile projector for presentations and entertainment",
+      "type": "DLP",
+      "status": "Available"
+    }
+  ],
+  "Monitor": [
+    {
+      "id": 1,
+      "name": "Dell UltraSharp",
+      "description": "27-inch 4K monitor with excellent color accuracy",
+      "type": "LCD",
+      "status": "Available"
+    },
+    {
+      "id": 2,
+      "name": "Samsung Odyssey",
+      "description": "Curved gaming monitor with high refresh rate",
+      "type": "LED",
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "name": "LG UltraWide",
+      "description": "34-inch ultrawide monitor for multitasking",
+      "type": "IPS",
+      "status": "Available"
+    }
+  ],
+  "Scanner": [
+    {
+      "id": 1,
+      "name": "Canon CanoScan",
+      "description": "High-resolution flatbed scanner for photos and documents",
+      "type": "Flatbed",
+      "status": "Available"
+    },
+    {
+      "id": 2,
+      "name": "Epson Perfection",
+      "description": "Versatile scanner with advanced image processing",
+      "type": "Flatbed",
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "name": "Fujitsu ScanSnap",
+      "description": "Compact document scanner with fast scanning speed",
+      "type": "Sheet-fed",
+      "status": "Available"
+    }
+  ],
+  "NetworkDevice": [
+    {
+      "id": 1,
+      "name": "Cisco Router",
+      "description": "Enterprise-grade router for high-speed networking",
+      "type": "Router",
+      "status": "Available"
+    },
+    {
+      "id": 2,
+      "name": "Netgear Switch",
+      "description": "16-port switch for efficient network management",
+      "type": "Switch",
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "name": "TP-Link Access Point",
+      "description": "Wireless access point for extended Wi-Fi coverage",
+      "type": "Access Point",
+      "status": "Available"
+    }
+  ],
+  "StorageDevice": [
+    {
+      "id": 1,
+      "name": "Seagate External HDD",
+      "description": "Portable external hard drive with 2TB capacity",
+      "type": "HDD",
+      "status": "Available"
+    },
+    {
+      "id": 2,
+      "name": "Samsung SSD",
+      "description": "High-speed solid-state drive with 1TB capacity",
+      "type": "SSD",
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "name": "Western Digital NAS",
+      "description": "Network-attached storage for home and office use",
+      "type": "NAS",
+      "status": "Available"
+    }
+  ],
+  "Accessories": [
+    {
+      "id": 1,
+      "name": "Logitech Mouse",
+      "description": "Wireless mouse with ergonomic design",
+      "type": "Mouse",
+      "status": "Available"
+    },
+    {
+      "id": 2,
+      "name": "Corsair Keyboard",
+      "description": "Mechanical keyboard with customizable RGB lighting",
+      "type": "Keyboard",
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "name": "JBL Headphones",
+      "description": "Over-ear headphones with noise cancellation",
+      "type": "Headphones",
+      "status": "Available"
+    }
+  ]
+}
