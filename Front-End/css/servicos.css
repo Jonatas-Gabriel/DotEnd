@@ -1,0 +1,43 @@
+/* css/servicos.css */
+
+.page-title h2 {
+    font-size: 2.2rem;
+    color: var(--cor-texto-headings);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background-color: var(--cor-fundo-secao-clara);
+    padding: 2rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--sombra-card-leve);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--sombra-hover);
+}
+
+.card h2 {
+    font-family: var(--font-titulos);
+    color: var(--cor-principal);
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.card p {
+    margin-bottom: 1.5rem;
+}
+
+.card .btn.disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+}

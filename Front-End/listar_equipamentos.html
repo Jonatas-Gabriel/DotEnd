@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>DotEnd - Lista de Equipamentos</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/lista.css">
+</head>
+<body>
+    <header class="header-principal">
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <span class="logo-text">DotEnd</span>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="servicos.html" class="active">Serviços</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container section-padding">
+        <section id="asset-list-section">
+            <div class="page-title">
+                <h2>Lista de Todos os Equipamentos</h2>
+                <p>Visualize, edite ou exclua seus ativos de TI.</p>
+            </div>
+
+            <!-- ÁREA CORRIGIDA: Esta é a div onde a tabela será inserida. -->
+            <!-- O ID é claro e único: "asset-list-container" -->
+            <div id="asset-list-container">
+                <p>Carregando equipamentos...</p>
+            </div>
+
+            <div class="voltar">
+                <a href="servicos.html">← Voltar aos Serviços</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 DotEnd - Gerenciamento de Ativos de TI.</p>
+        </div>
+    </footer>
+
+    <!-- LOCAL CORRETO: O script é a última coisa antes de fechar o </body> -->
+    <script type="module" src="js/lista.js"></script>
+</body>
+</html>
