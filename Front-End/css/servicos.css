@@ -1,0 +1,181 @@
+/* css/servicos.css */
+
+:root {
+    /* Cores ajustadas para um tema mais escuro/tecnológico */
+    --cor-texto-headings: #E0E0E0; /* Cinza claro para títulos sobre fundos escuros */
+    --cor-fundo-secao-clara: rgba(255, 255, 255, 0.1); /* Fundo dos cards: branco semi-transparente */
+    --border-radius-md: 8px;
+    --sombra-card-leve: 0 2px 10px rgba(0,0,0,0.3); /* Sombra mais visível em fundo escuro */
+    --sombra-hover: 0 8px 25px rgba(0,0,0,0.4); /* Sombra mais intensa no hover */
+    --font-titulos: 'Montserrat', 'Segoe UI', Arial, sans-serif; /* Usando Montserrat para títulos conforme o style.css principal */
+    --cor-principal: #00AEEF; /* Um azul mais vibrante e tecnológico para destaque */
+    --cor-principal-hover: #008DCC; /* Tom mais escuro para hover do azul principal */
+    --cor-texto-paragrafo: #B0B0B0; /* Cinza médio para parágrafos */
+    --cor-texto-claro: #FFFFFF; /* Branco puro para texto em botões principais etc. */
+}
+
+/* Importar fontes do Google Fonts (garantir que Montserrat esteja disponível) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+
+body {
+    min-height: 100vh;
+    /* Imagem de fundo tecnológica, com sobreposição linear-gradient para escurecer */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/Front-End/Images/Gemini_Generated_Image_saftonsaftonsaft.png'); /* */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed; /* Mantém a imagem fixa ao rolar */
+    
+    /* Cores gerais do texto do body sobre o background escuro */
+    color: var(--cor-texto-paragrafo);
+    font-family: 'Roboto', sans-serif; /* Consistente com --font-principal do style.css */
+    line-height: 1.7;
+    margin: 0;
+    padding-top: 80px; /* Manter padding para o header fixo */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ajustes para o cabeçalho, seções, e container para ficarem bem sobre o fundo escuro */
+.header-principal {
+    background-color: rgba(0, 0, 0, 0.8); /* Cabeçalho semi-transparente escuro */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Sombra mais escura */
+    color: var(--cor-texto-headings); /* Cor do texto do cabeçalho */
+}
+
+.header-principal .logo-text {
+    color: var(--cor-principal); /* Logo DotEnd em azul vibrante */
+}
+
+.main-nav a {
+    color: var(--cor-texto-paragrafo); /* Links da navegação */
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--cor-principal); /* Links da navegação no hover/ativo */
+}
+
+.main-nav a::after {
+    background-color: var(--cor-principal); /* Linha do hover/ativo */
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-top: 2rem; /* Espaçamento no topo da seção de título */
+}
+
+.page-title h2 {
+    font-size: 2.8rem; /* Aumentado um pouco para destaque */
+    color: var(--cor-texto-headings); /* Cinza claro para títulos */
+    font-weight: 700; /* Mais bold */
+    margin-bottom: 1rem;
+    font-family: var(--font-titulos);
+    text-shadow: 0 0 10px rgba(0, 174, 239, 0.5); /* Efeito de brilho sutil */
+}
+
+.page-title p {
+    font-size: 1.1rem;
+    color: var(--cor-texto-paragrafo); /* Cinza claro para parágrafos */
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem; /* Aumentado o gap para melhor espaçamento */
+    margin-top: 2rem;
+}
+
+.card {
+    background-color: var(--cor-fundo-secao-clara); /* Fundo semi-transparente */
+    padding: 2rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--sombra-card-leve);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border: 1px solid rgba(0, 174, 239, 0.3); /* Borda sutil com a cor principal */
+}
+
+.card:hover {
+    transform: translateY(-8px); /* Aumentado o deslocamento no hover */
+    box-shadow: var(--sombra-hover);
+    border-color: var(--cor-principal); /* Borda mais intensa no hover */
+}
+
+.card h2 {
+    font-family: var(--font-titulos);
+    color: var(--cor-principal); /* Títulos dos cards em azul vibrante */
+    margin-top: 0;
+    font-size: 1.8rem; /* Aumentado um pouco o tamanho */
+    text-shadow: 0 0 5px rgba(0, 174, 239, 0.3); /* Efeito de brilho nos títulos dos cards */
+}
+
+.card p {
+    color: var(--cor-texto-paragrafo); /* Texto dos parágrafos dos cards em cinza médio */
+    margin-bottom: 1.5rem;
+}
+
+/* Estilos de botões para combinar com o novo esquema de cores */
+.btn-primary {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    border-color: var(--cor-principal);
+    box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4); /* Sombra para o botão principal */
+}
+
+.btn-primary:hover {
+    background-color: var(--cor-principal-hover);
+    border-color: var(--cor-principal-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 174, 239, 0.6);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--cor-principal);
+    border: 2px solid var(--cor-principal);
+}
+
+.btn-secondary:hover {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+}
+
+.card .btn.disabled {
+    background-color: rgba(100, 100, 100, 0.5); /* Mais escuro e semi-transparente */
+    border-color: rgba(100, 100, 100, 0.5);
+    color: #EEE; /* Texto mais claro */
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none;
+}
+
+/* Footer (se houver no servicos.html e não for global pelo style.css) */
+footer {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: rgba(0, 0, 0, 0.9); /* Footer bem escuro e quase opaco */
+    color: var(--cor-texto-headings); /* Texto do footer em cinza claro */
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(0, 174, 239, 0.2); /* Borda sutil de destaque */
+}
+
+/* Ajustes para telas menores (Media Queries) */
+@media (max-width: 768px) {
+    .page-title h2 {
+        font-size: 2.2rem;
+    }
+    .cards {
+        gap: 1rem;
+    }
+    .card {
+        padding: 1.5rem;
+    }
+    .card h2 {
+        font-size: 1.4rem;
+    }
+}

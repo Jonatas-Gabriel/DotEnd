@@ -1,0 +1,205 @@
+/* DotEnd-main/public/css/listar_equipamentos.css */
+
+#asset-list-section {
+    /* Fundo semi-transparente escuro para a seção de lista */
+    background-color: rgba(0, 0, 0, 0.6); /* Consistente com formulários */
+    padding: 2.5rem; /* Aumentar padding */
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--sombra-padrao); /* Sombra consistente */
+    border: 1px solid rgba(0, 174, 239, 0.2); /* Borda sutil de destaque */
+}
+
+.filter-controls {
+    margin-bottom: 25px; /* Mais espaçamento */
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Mais espaçamento entre elementos do filtro */
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+}
+
+.filter-controls label {
+    font-weight: 500;
+    color: var(--cor-texto-headings); /* Labels claros */
+    font-size: 1.1rem;
+}
+
+.filter-controls select {
+    padding: 10px; /* Aumenta padding */
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(0, 174, 239, 0.2); /* Borda sutil */
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente escuro */
+    color: var(--cor-texto-claro); /* Texto claro */
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-controls select:focus {
+    border-color: var(--cor-principal);
+    box-shadow: 0 0 0 3px rgba(0, 174, 239, 0.3);
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+/* Estilos para a tabela de ativos */
+.asset-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: var(--sombra-card-leve); /* Sombra leve para a tabela */
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo da tabela semi-transparente escuro */
+}
+
+.asset-table thead th {
+    background-color: var(--cor-principal); /* Cabeçalho da tabela azul vibrante */
+    color: var(--cor-texto-claro); /* Texto branco */
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    font-family: var(--font-titulos);
+}
+
+.asset-table tbody tr {
+    background-color: transparent; /* Linhas transparentes */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil entre linhas */
+    transition: background-color 0.3s ease;
+}
+
+.asset-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.asset-table tbody tr:hover {
+    background-color: rgba(0, 174, 239, 0.1); /* Efeito de hover sutil */
+}
+
+.asset-table tbody td {
+    padding: 15px;
+    color: var(--cor-texto-headings); /* Texto das células claro */
+    font-size: 0.95rem;
+}
+
+/* Estilos para o modal de edição */
+#edit-modal {
+    display: none; /* Controlado por JS, não pelo CSS */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8); /* Fundo do modal mais escuro e opaco */
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    /* Use flex-direction: column no JS ou em um wrapper interno se necessário */
+}
+
+#edit-modal > div { /* Conteúdo interno do modal */
+    background: var(--cor-fundo-geral); /* Fundo do modal em preto/cinza muito escuro */
+    padding: 30px;
+    border-radius: var(--border-radius-md);
+    width: 450px; /* Largura um pouco maior para o modal */
+    max-width: 90%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.7);
+    border: 1px solid rgba(0, 174, 239, 0.3); /* Borda azul sutil */
+    text-align: left; /* Alinha o texto do modal à esquerda */
+}
+
+#edit-modal h3 {
+    margin-top: 0;
+    color: var(--cor-texto-headings); /* Título do modal claro */
+    margin-bottom: 20px;
+    text-align: center; /* Centraliza o título do modal */
+    font-family: var(--font-titulos);
+    font-weight: 700;
+}
+
+#edit-modal .form-group {
+    margin-bottom: 15px;
+}
+
+#edit-modal label {
+    color: var(--cor-texto-paragrafo); /* Rótulos do modal */
+    margin-bottom: 5px;
+    display: block;
+}
+
+#edit-modal input[type="text"],
+#edit-modal select,
+#edit-modal textarea { /* Incluí textarea para consistência */
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(0, 174, 239, 0.2);
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo dos inputs do modal */
+    color: var(--cor-texto-headings); /* Texto digitado no modal */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+#edit-modal input[type="text"]:focus,
+#edit-modal select:focus,
+#edit-modal textarea:focus {
+    border-color: var(--cor-principal);
+    box-shadow: 0 0 0 3px rgba(0, 174, 239, 0.3);
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#edit-modal button {
+    margin-top: 20px; /* Mais espaço para os botões */
+    margin-right: 15px; /* Espaço entre os botões */
+}
+
+/* Ajustes de responsividade para a tabela */
+@media (max-width: 768px) {
+    .asset-table thead {
+        display: none;
+    }
+
+    .asset-table, .asset-table tbody, .asset-table tr, .asset-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .asset-table tr {
+        margin-bottom: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--sombra-card-leve);
+        background-color: rgba(0, 0, 0, 0.4); /* Fundo do card da linha da tabela */
+    }
+
+    .asset-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .asset-table td:last-child {
+        border-bottom: 0;
+    }
+
+    .asset-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--cor-principal); /* Título da célula em azul principal */
+    }
+    .asset-table .edit-btn,
+    .asset-table .delete-btn {
+        width: calc(100% - 10px); /* Ajusta para ter um pequeno espaçamento */
+        margin-left: 5px !important; /* Centraliza melhor */
+        margin-right: 5px !important;
+        margin-bottom: 10px; /* Mais espaço entre os botões */
+    }
+}

@@ -1,0 +1,716 @@
+/* DotEnd-main/public/css/style.css (ou global.css) */
+:root {
+    /* Cores ajustadas para um tema mais escuro/tecnológico - CONSISTENTES EM TODO O SITE */
+    --cor-principal: #00AEEF; /* Azul vibrante e tecnológico para destaque (anteriormente #009688) */
+    --cor-principal-hover: #008DCC; /* Tom mais escuro para hover do azul principal */
+    --cor-principal-light: rgba(0, 174, 239, 0.1); /* Tom pastel do azul para fundos sutis/cards */
+    --cor-secundaria: #00334C; /* Azul escuro para textos ou acentos, ou footer */
+    --cor-destaque: #FFD700; /* Amarelo/Dourado para CTAs secundários ou alertas */
+
+    --cor-header-bg: rgba(0, 0, 0, 0.8); /* Cabeçalho semi-transparente escuro */
+    --cor-header-texto: #E0E0E0; /* Texto do cabeçalho claro */
+    --cor-header-borda: rgba(255, 255, 255, 0.1); /* Borda sutil */
+
+    --cor-fundo-geral: #1A1A1A; /* Fundo geral bem escuro */
+    --cor-fundo-secao-clara: rgba(255, 255, 255, 0.05); /* Fundo dos cards/seções claras: branco semi-transparente */
+
+    --cor-texto-headings: #E0E0E0; /* Cinza claro para títulos */
+    --cor-texto-paragrafo: #B0B0B0; /* Cinza médio para parágrafos */
+    --cor-texto-claro: #FFFFFF; /* Branco puro para texto em botões principais etc. */
+
+    --sombra-padrao: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra mais visível em fundo escuro */
+    --sombra-hover: 0 8px 25px rgba(0, 0, 0, 0.6); /* Sombra mais intensa no hover */
+    --sombra-card-leve: 0 2px 10px rgba(0,0,0,0.3); /* Sombra mais visível em fundo escuro */
+
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+
+    --font-principal: 'Roboto', 'Segoe UI', Arial, sans-serif;
+    --font-titulos: 'Montserrat', 'Segoe UI', Arial, sans-serif; /* Fonte mais marcante para títulos */
+}
+
+/* Importar fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: var(--font-principal);
+    /* A imagem de fundo agora é global para o body, com sobreposição */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/Gemini_Generated_Image_saftonsaftonsaft.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    
+    color: var(--cor-texto-paragrafo); /* Cor geral dos parágrafos */
+    line-height: 1.7;
+    margin: 0;
+    
+    /* Sticky Footer */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 80px; /* Espaço para o header fixo, aplicado ao body */
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reajuste para que o main comece abaixo do header, já que padding-top foi pro body */
+main {
+    flex-grow: 1; /* Faz a main crescer e empurrar o footer */
+    /* Remova qualquer padding-top da main se ele foi movido para o body */
+    /* Seções individuais dentro da main podem ter padding-top se necessário */
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Header Fixo */
+.header-principal.homepage-header {
+    background-color: var(--cor-header-bg); /* Usa a cor definida no :root */
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--cor-header-borda);
+    height: 80px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5); /* Sombra mais escura */
+}
+
+.homepage-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+.logo-text {
+    font-family: var(--font-titulos);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--cor-principal); /* Nome com a cor principal (azul vibrante) */
+}
+
+.main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.main-nav li { margin-left: 28px; }
+.main-nav a {
+    text-decoration: none;
+    color: var(--cor-header-texto); /* Texto do cabeçalho claro */
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 10px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--cor-principal); /* Linha em azul vibrante */
+    transition: width 0.3s ease;
+}
+.main-nav a:hover::after,
+.main-nav a.active::after {
+    width: 100%;
+}
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--cor-principal); /* Hover/ativo em azul vibrante */
+}
+
+/* Botões Globais */
+.btn {
+    padding: 12px 28px;
+    text-decoration: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-align: center;
+}
+.btn-primary {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    border-color: var(--cor-principal);
+    box-shadow: 0 4px 15px rgba(0, 174, 239, 0.4); /* Sombra para o botão principal */
+}
+.btn-primary:hover {
+    background-color: var(--cor-principal-hover);
+    border-color: var(--cor-principal-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 174, 239, 0.6);
+}
+.btn-secondary {
+    background-color: transparent;
+    color: var(--cor-principal);
+    border: 2px solid var(--cor-principal);
+}
+.btn-secondary:hover {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+}
+.btn-outline {
+    background-color: transparent;
+    color: var(--cor-principal); /* Cor do texto principal */
+    border: 2px solid var(--cor-principal-light); /* Borda sutil */
+}
+.btn-outline:hover {
+    color: var(--cor-principal-hover);
+    border-color: var(--cor-principal);
+    box-shadow: 0 2px 8px rgba(0, 174, 239, 0.2);
+}
+.btn-lg { padding: 15px 35px; font-size: 1.1rem; }
+.btn-login {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+}
+.btn-login:hover {
+    background-color: var(--cor-principal-hover);
+}
+.btn-light { /* Este botão pode ser usado em seções escuras para ter um visual mais claro */
+    background-color: var(--cor-fundo-secao-clara); /* Fundo semi-transparente */
+    color: var(--cor-principal);
+    border: 1px solid rgba(0, 174, 239, 0.2);
+}
+.btn-light:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: var(--sombra-card-leve);
+}
+
+
+/* Hero Section */
+.hero-section {
+    padding: 0;
+    min-height: calc(100vh - 80px); /* Altura total da tela menos o header */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    /* Imagem de fundo removida daqui, agora está no body */
+    /* box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.4); Removido, agora é parte da imagem de fundo do body */
+}
+
+/* Elementos gráficos de fundo (opcional) */
+.hero-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.08;
+    background-color: var(--cor-principal); /* Usa a cor principal azul */
+}
+.hero-shape-1 {
+    width: 300px; height: 300px;
+    top: -100px; left: -100px;
+}
+.hero-shape-2 {
+    width: 400px; height: 400px;
+    bottom: -150px; right: -150px;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro semi-transparente para o conteúdo */
+    padding: 3rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--sombra-padrao);
+    border: 1px solid rgba(0, 174, 239, 0.2); /* Borda sutil */
+}
+.hero-text h1 {
+    font-family: var(--font-titulos);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--cor-texto-headings); /* Títulos em cinza claro */
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 15px rgba(0, 174, 239, 0.7); /* Brilho mais forte para o título principal */
+}
+.hero-text p {
+    font-size: 1.15rem;
+    margin-bottom: 2.5rem;
+    color: var(--cor-texto-paragrafo); /* Parágrafos em cinza médio */
+    max-width: 500px;
+}
+.hero-cta .btn { margin-right: 1rem; margin-bottom: 1rem; }
+.hero-image-container { text-align: center; }
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 450px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--sombra-hover); /* Sombra mais proeminente */
+    border: 1px solid rgba(0, 174, 239, 0.4); /* Borda em tom de azul */
+}
+
+/* Seções Genéricas */
+.section-padding { padding: 80px 0; }
+.section-padding:nth-child(even) { background-color: var(--cor-fundo-geral); } /* Seções pares com fundo geral escuro */
+.section-padding:nth-child(odd) { background-color: var(--cor-secundaria); } /* Seções ímpares com azul escuro */
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.section-title h2 {
+    font-family: var(--font-titulos);
+    font-size: 2.4rem;
+    color: var(--cor-texto-headings); /* Títulos em cinza claro */
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(0, 174, 239, 0.3); /* Brilho sutil */
+}
+.section-title h2::after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 4px;
+    background-color: var(--cor-principal); /* Linha em azul vibrante */
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+.section-title p {
+    font-size: 1.1rem;
+    color: var(--cor-texto-paragrafo); /* Parágrafos em cinza médio */
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Proposta Section */
+.proposta-section {
+    background-color: var(--cor-fundo-secao-clara); /* Fundo semi-transparente para esta seção */
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Borda divisória sutil */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.proposta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    align-items: center;
+    gap: 3rem;
+}
+.proposta-image-container img {
+    width: 100%;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--sombra-padrao);
+    border: 1px solid rgba(0, 174, 239, 0.2);
+}
+.proposta-text-content h3 {
+    font-family: var(--font-titulos);
+    font-size: 1.8rem;
+    color: var(--cor-texto-headings);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+.proposta-text-content p { color: var(--cor-texto-paragrafo); margin-bottom: 1.5rem; }
+.proposta-text-content ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 2rem;
+}
+.proposta-text-content ul li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    color: var(--cor-texto-paragrafo);
+}
+.proposta-text-content ul li i {
+    color: var(--cor-principal);
+    margin-right: 10px;
+    font-size: 1.2em;
+}
+
+/* Features Section (Recursos) */
+.features-section { background-color: var(--cor-fundo-geral); } /* Fundo geral escuro */
+.features-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+.feature-card {
+    background-color: var(--cor-fundo-secao-clara); /* Fundo semi-transparente */
+    padding: 2.5rem 2rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--sombra-card-leve);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border-top: 4px solid var(--cor-principal); /* Borda superior azul */
+}
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--sombra-hover);
+    border-color: var(--cor-principal); /* Borda mais intensa no hover */
+}
+.feature-card .feature-icon {
+    font-size: 2.8rem;
+    color: var(--cor-principal);
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    background-color: rgba(0, 174, 239, 0.1); /* Círculo de fundo para o ícone */
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0, 174, 239, 0.5); /* Brilho no ícone */
+}
+.feature-card h3 {
+    font-family: var(--font-titulos);
+    font-size: 1.4rem;
+    color: var(--cor-texto-headings);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+.feature-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--cor-texto-paragrafo);
+}
+
+/* Diferenciais Section */
+.diferenciais-section { background-color: var(--cor-secundaria); } /* Fundo azul escuro */
+.diferenciais-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+.diferencial-item {
+    text-align: center;
+    padding: 1.5rem;
+}
+.diferencial-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    font-size: 2.2rem;
+    margin: 0 auto 1.5rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 174, 239, 0.5); /* Sombra mais forte */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.diferencial-item:hover .diferencial-icon-wrapper {
+    transform: scale(1.15); /* Aumenta mais no hover */
+    box-shadow: 0 6px 20px rgba(0, 174, 239, 0.8);
+}
+.diferencial-item h3 {
+    font-family: var(--font-titulos);
+    font-size: 1.3rem;
+    color: var(--cor-texto-headings);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+.diferencial-item p {
+    color: var(--cor-texto-paragrafo);
+}
+
+
+/* CTA Section */
+.cta-section {
+    background-color: var(--cor-principal); /* Fundo azul vibrante para o CTA principal */
+    color: var(--cor-texto-claro);
+    text-align: center;
+    padding: 70px 0;
+    box-shadow: 0 -4px 15px rgba(0, 174, 239, 0.5); /* Sombra superior para destacar */
+}
+.cta-section .section-title h2,
+.cta-section .section-title p {
+    color: var(--cor-texto-claro); /* Texto claro sobre fundo azul */
+}
+.cta-section .section-title h2::after {
+    background-color: var(--cor-texto-claro); /* Linha decorativa clara */
+}
+.cta-section .btn { margin: 0.5rem; }
+.btn-cta.btn-primary {
+    background-color: var(--cor-texto-claro);
+    color: var(--cor-principal);
+    border-color: var(--cor-texto-claro);
+}
+.btn-cta.btn-primary:hover {
+    background-color: #f0f0f0;
+    border-color: #f0f0f0;
+    color: var(--cor-principal-hover);
+}
+.btn-cta.btn-light {
+    background-color: transparent;
+    color: var(--cor-texto-claro);
+    border: 2px solid var(--cor-texto-claro);
+}
+.btn-cta.btn-light:hover {
+    background-color: var(--cor-texto-claro);
+    color: var(--cor-principal);
+}
+
+
+/* Contact Section */
+.contact-section { background-color: var(--cor-fundo-geral); } /* Fundo geral escuro */
+.contact-form {
+    max-width: 700px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+/* .form-group removido por estar vazio */
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+.contact-form label {
+    color: var(--cor-texto-headings); /* Rótulos em cinza claro */
+    margin-bottom: 5px;
+    display: block;
+}
+.contact-form input,
+.contact-form textarea,
+.contact-form select { /* Incluído select para formulários */
+    width: 100%;
+    padding: 1rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(0, 174, 239, 0.2); /* Borda sutil */
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo dos inputs semi-transparente escuro */
+    color: var(--cor-texto-headings); /* Texto digitado claro */
+    font-family: inherit;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+    border-color: var(--cor-principal);
+    box-shadow: 0 0 0 3px rgba(0, 174, 239, 0.3);
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.6); /* Mais escuro no foco */
+}
+.contact-form button {
+    width: auto;
+    min-width: 200px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: rgba(0, 0, 0, 0.9); /* Footer bem escuro e quase opaco */
+    color: var(--cor-texto-paragrafo); /* Texto do footer em cinza médio */
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(0, 174, 239, 0.2); /* Borda superior sutil */
+}
+footer p { margin-bottom: 0.5rem; }
+
+/* Media Queries para Responsividade (Exemplos básicos) */
+@media (max-width: 992px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .hero-text { order: 2; }
+    .hero-image-container { order: 1; margin-bottom: 2rem; }
+    .hero-text h1 { font-size: 2.4rem; }
+    .hero-text p { font-size: 1rem; }
+
+    .proposta-grid {
+        grid-template-columns: 1fr;
+    }
+    .proposta-image-container { margin-bottom: 2rem; }
+
+    .section-title h2 { font-size: 2rem; }
+}
+
+@media (max-width: 768px) {
+    body { padding-top: 70px; }
+    .header-principal.homepage-header { height: 70px; }
+    .logo {
+        height: 70px;
+        width: 70px;
+    }
+    .logo-text { font-size: 1.5rem; }
+    .main-nav { display: none; }
+    .btn-login { padding: 8px 18px; font-size: 0.9rem; }
+
+    .hero-section { padding: 40px 0; min-height: auto; }
+    .hero-text h1 { font-size: 2rem; }
+    .hero-text p { font-size: 1rem; }
+    .hero-cta .btn { margin-right: 0.5rem; margin-bottom: 0.5rem; padding: 10px 20px; font-size: 0.9rem; }
+
+    .section-padding { padding: 60px 0; }
+    .section-title h2 { font-size: 1.8rem; }
+
+    .contact-form { grid-template-columns: 1fr; }
+}
+
+/* Estilos para a tabela de ativos (para listar_equipamentos.html) */
+.asset-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: var(--sombra-card-leve);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo da tabela semi-transparente escuro */
+}
+
+.asset-table thead th {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-claro);
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.asset-table tbody tr {
+    background-color: transparent; /* Linhas transparentes */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil entre linhas */
+    transition: background-color 0.3s ease;
+}
+
+.asset-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.asset-table tbody tr:hover {
+    background-color: rgba(0, 174, 239, 0.1); /* Efeito de hover sutil */
+}
+
+.asset-table tbody td {
+    padding: 15px;
+    color: var(--cor-texto-headings); /* Texto das células claro */
+    font-size: 0.95rem;
+}
+
+/* Estilos para o modal de edição */
+#edit-modal {
+    flex-direction: column;
+    z-index: 1001;
+    background: rgba(0,0,0,0.8); /* Fundo do modal mais escuro */
+}
+
+#edit-modal > div { /* Conteúdo interno do modal */
+    background: #1A1A1A; /* Fundo do modal em preto/cinza muito escuro */
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.7);
+    border: 1px solid rgba(0, 174, 239, 0.3); /* Borda azul sutil */
+}
+
+#edit-modal h3 {
+    color: var(--cor-texto-headings); /* Título do modal claro */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#edit-modal .form-group {
+    margin-bottom: 15px;
+}
+
+#edit-modal label {
+    color: var(--cor-texto-paragrafo); /* Rótulos do modal */
+}
+
+#edit-modal input[type="text"],
+#edit-modal select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid rgba(0, 174, 239, 0.2);
+    font-size: 1rem;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo dos inputs do modal */
+    color: var(--cor-texto-headings);
+}
+
+#edit-modal input[type="text"]:focus,
+#edit-modal select:focus {
+    border-color: var(--cor-principal);
+    box-shadow: 0 0 0 3px rgba(0, 174, 239, 0.3);
+    outline: none;
+}
+
+#edit-modal button {
+    margin-right: 10px;
+}
+
+/* Ajustes para telas menores na tabela */
+@media (max-width: 768px) {
+    .asset-table, .asset-table tbody, .asset-table thead, .asset-table th, .asset-table td, .asset-table tr {
+        display: block;
+    }
+
+    .asset-table thead {
+        display: none;
+    }
+
+    .asset-table tr {
+        margin-bottom: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--sombra-card-leve);
+        background-color: rgba(0, 0, 0, 0.4); /* Fundo do card da linha da tabela */
+    }
+
+    .asset-table td {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .asset-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: 600;
+        color: var(--cor-principal); /* Título da célula em azul principal */
+    }
+    .asset-table td:last-child {
+        border-bottom: none;
+    }
+
+    .asset-table .edit-btn,
+    .asset-table .delete-btn {
+        width: 100%;
+        margin-left: 0 !important;
+        margin-bottom: 5px;
+    }
+}

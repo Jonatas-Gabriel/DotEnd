@@ -1,0 +1,41 @@
+{
+  "Computer": [
+    {
+      "id": "2721",
+      "name": "aaaa",
+      "description": "aaaa",
+      "model": "aaaa",
+      "status": "Available"
+    }
+  ],
+  "Printer": [],
+  "Projector": [],
+  "Monitor": [],
+  "Scanner": [],
+  "NetworkDevice": [],
+  "StorageDevice": [
+    {
+      "id": "2",
+      "name": "Samsung SSD",
+      "description": "High-speed solid-state drive with 1TB capacity",
+      "type": "SSD",
+      "status": "Available"
+    },
+    {
+      "id": "3",
+      "name": "Western Digital NAS",
+      "description": "Network-attached storage for home and office use",
+      "type": "NAS",
+      "status": "Available"
+    }
+  ],
+  "Accessories": [
+    {
+      "id": "1",
+      "name": "Logitech Mouse",
+      "description": "Wireless mouse with ergonomic design",
+      "type": "Mouse",
+      "status": "Available"
+    }
+  ]
+}

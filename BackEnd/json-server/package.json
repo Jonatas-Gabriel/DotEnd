@@ -1,0 +1,13 @@
+{
+  "name": "dotend-backend",
+  "version": "1.0.0",
+  "description": "Backend para o sistema DotEnd",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "npx json-server --watch db.json"
+  },
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}
