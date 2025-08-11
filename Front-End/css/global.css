@@ -1,41 +1,59 @@
-/* css/global.css */
+/* ===========================
+   Variáveis de tema e fontes
+   =========================== */
 :root {
+    /* Paleta de cores principal e complementares */
     --cor-principal: #009688;
     --cor-principal-hover: #00796b;
     --cor-principal-light: #e0f2f1;
     --cor-secundaria: #004d40;
     --cor-destaque: #ffc107;
+
+    /* Cores do header */
     --cor-header-bg: #ffffff;
     --cor-header-texto: #37474f;
     --cor-header-borda: #e0e0e0;
+
+    /* Cores de fundo e textos */
     --cor-fundo-geral: #f7f9fa;
     --cor-fundo-secao-clara: #ffffff;
     --cor-texto-headings: #263238;
     --cor-texto-paragrafo: #546e7a;
     --cor-texto-claro: #ffffff;
+
+    /* Sombras padrões do tema */
     --sombra-padrao: 0 4px 15px rgba(0, 0, 0, 0.07);
     --sombra-hover: 0 6px 20px rgba(0, 0, 0, 0.1);
     --sombra-card-leve: 0 2px 8px rgba(0,0,0,0.05);
+
+    /* Bordas arredondadas */
     --border-radius-sm: 4px;
     --border-radius-md: 8px;
     --border-radius-lg: 12px;
+
+    /* Fontes principais */
     --font-principal: 'Roboto', 'Segoe UI', Arial, sans-serif;
     --font-titulos: 'Montserrat', 'Segoe UI', Arial, sans-serif;
 }
 
+/* Importa fontes Google Fonts usadas no projeto */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Roboto:wght@400;500;700&display=swap');
 
+/* ===========================
+   Estilos gerais do corpo
+   =========================== */
 body {
     font-family: var(--font-principal);
     background-color: var(--cor-fundo-geral);
     color: var(--cor-texto-paragrafo);
     line-height: 1.7;
     margin: 0;
-    padding-top: 80px;
-    -webkit-font-smoothing: antialiased;
+    padding-top: 80px; /* espaço para o header fixo */
+    -webkit-font-smoothing: antialiased; /* suavização de fonte */
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Centralização de conteúdo padrão */
 .container {
     width: 90%;
     max-width: 1140px;
@@ -43,14 +61,14 @@ body {
     padding: 0 15px;
 }
 
-/* Header Fixo */
+/* ===========================
+   Header fixo
+   =========================== */
 .header-principal {
     background-color: var(--cor-header-bg);
     padding: 0;
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     z-index: 1000;
     border-bottom: 1px solid var(--cor-header-borda);
     height: 80px;
@@ -64,6 +82,7 @@ body {
     height: 100%;
 }
 
+/* Logo e texto */
 .logo-link {
     display: flex;
     align-items: center;
@@ -71,8 +90,7 @@ body {
 }
 
 .logo {
-    width: 80px;
-    height: 80px;
+    width: 80px; height: 80px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
@@ -85,10 +103,10 @@ body {
     color: var(--cor-principal);
 }
 
+/* Navegação principal */
 .main-nav ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
+    padding: 0; margin: 0;
     display: flex;
 }
 
@@ -104,28 +122,25 @@ body {
     transition: color 0.3s ease;
 }
 
+/* Linha animada abaixo do link ativo/hover */
 .main-nav a::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
     background-color: var(--cor-principal);
     transition: width 0.3s ease;
 }
 
 .main-nav a:hover::after,
-.main-nav a.active::after {
-    width: 100%;
-}
+.main-nav a.active::after { width: 100%; }
 
 .main-nav a:hover,
-.main-nav a.active {
-    color: var(--cor-principal);
-}
+.main-nav a.active { color: var(--cor-principal); }
 
-/* Botões Globais */
+/* ===========================
+   Botões globais
+   =========================== */
 .btn {
     padding: 12px 28px;
     text-decoration: none;
@@ -139,12 +154,12 @@ body {
     text-align: center;
 }
 
+/* Botão primário */
 .btn-primary {
     background-color: var(--cor-principal);
     color: var(--cor-texto-claro);
     border-color: var(--cor-principal);
 }
-
 .btn-primary:hover {
     background-color: var(--cor-principal-hover);
     border-color: var(--cor-principal-hover);
@@ -152,63 +167,68 @@ body {
     box-shadow: 0 4px 10px rgba(0, 150, 136, 0.3);
 }
 
+/* Botão secundário */
 .btn-secondary {
     background-color: transparent;
     color: var(--cor-principal);
     border: 2px solid var(--cor-principal);
 }
-
 .btn-secondary:hover {
     background-color: var(--cor-principal);
     color: var(--cor-texto-claro);
 }
 
+/* Botão com borda clara */
 .btn-outline {
     background-color: transparent;
     color: var(--cor-secundaria);
     border: 2px solid var(--cor-principal-light);
 }
-
 .btn-outline:hover {
     color: var(--cor-principal);
     border-color: var(--cor-principal);
 }
 
-.btn-lg { padding: 15px 35px; font-size: 1.1rem; }
+/* Botões de tamanho grande */
+.btn-lg {
+    padding: 15px 35px;
+    font-size: 1.1rem;
+}
 
+/* Botão de login no header */
 .btn-login {
     background-color: var(--cor-principal);
     color: var(--cor-texto-claro);
 }
-
 .btn-login:hover {
     background-color: var(--cor-principal-hover);
 }
 
+/* Botão claro */
 .btn-light {
     background-color: var(--cor-fundo-secao-clara);
     color: var(--cor-principal);
     border: 1px solid var(--cor-header-borda);
 }
-
 .btn-light:hover {
     background-color: #f0f0f0;
     box-shadow: var(--sombra-card-leve);
 }
 
-
-/* Seções Genéricas e Títulos */
+/* ===========================
+   Estrutura de seções e títulos
+   =========================== */
 .section-padding { padding: 80px 0; }
 
+/* Alternância de cor de fundo entre seções */
 .section-padding:nth-child(even) { background-color: var(--cor-fundo-secao-clara); }
-
 .section-padding:nth-child(odd) { background-color: var(--cor-principal-light); }
 
+/* Estilo do título de seção */
 .section-title {
     text-align: center;
     margin-bottom: 50px;
 }
-
 .section-title h2 {
     font-family: var(--font-titulos);
     font-size: 2.4rem;
@@ -216,17 +236,14 @@ body {
     margin-bottom: 10px;
     font-weight: 600;
 }
-
 .section-title h2::after {
     content: '';
     display: block;
-    width: 70px;
-    height: 4px;
+    width: 70px; height: 4px;
     background-color: var(--cor-principal);
     margin: 15px auto 0;
     border-radius: 2px;
 }
-
 .section-title p {
     font-size: 1.1rem;
     color: var(--cor-texto-paragrafo);
@@ -234,22 +251,21 @@ body {
     margin: 0 auto;
 }
 
+/* Link de voltar */
 .voltar {
     margin-top: 2rem;
     text-align: center;
 }
-
 .voltar a {
     color: var(--cor-principal);
     text-decoration: none;
     font-weight: 500;
 }
+.voltar a:hover { text-decoration: underline; }
 
-.voltar a:hover {
-    text-decoration: underline;
-}
-
-/* Footer */
+/* ===========================
+   Rodapé
+   =========================== */
 footer {
     text-align: center;
     padding: 3rem 1rem;
@@ -257,16 +273,17 @@ footer {
     color: var(--cor-principal-hover);
     font-size: 0.9rem;
 }
-
 footer p { margin-bottom: 0.5rem; }
 
-/* Media Queries Globais */
+/* ===========================
+   Responsividade
+   =========================== */
 @media (max-width: 768px) {
     body { padding-top: 70px; }
     .header-principal.homepage-header { height: 70px; }
     .logo { height: 70px; width: 70px; }
     .logo-text { font-size: 1.5rem; }
-    .main-nav { display: none; }
+    .main-nav { display: none; } /* esconde menu em telas pequenas */
     .btn-login { padding: 8px 18px; font-size: 0.9rem; }
     .section-padding { padding: 60px 0; }
     .section-title h2 { font-size: 2rem; }

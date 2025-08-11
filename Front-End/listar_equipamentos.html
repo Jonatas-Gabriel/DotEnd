@@ -1,52 +1,69 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Define a codificação de caracteres para suporte a acentos -->
     <meta charset="UTF-8">
+
+    <!-- Título exibido na aba do navegador -->
     <title>DotEnd - Lista de Equipamentos</title>
+
+    <!-- CSS global para estilos compartilhados em todo o site -->
     <link rel="stylesheet" href="css/global.css">
+
+    <!-- CSS específico para a página de lista -->
     <link rel="stylesheet" href="css/lista.css">
 </head>
 <body>
+    <!-- Cabeçalho fixo no topo -->
     <header class="header-principal">
         <div class="container">
+            <!-- Logo com link para a página inicial -->
             <a href="index.html" class="logo-link">
                 <span class="logo-text">DotEnd</span>
             </a>
+
+            <!-- Menu de navegação -->
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
+                    <!-- Página atual marcada com "active" -->
                     <li><a href="servicos.html" class="active">Serviços</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- Conteúdo principal -->
     <main class="container section-padding">
         <section id="asset-list-section">
+            <!-- Título da página -->
             <div class="page-title">
                 <h2>Lista de Todos os Equipamentos</h2>
                 <p>Visualize, edite ou exclua seus ativos de TI.</p>
             </div>
 
-            <!-- ÁREA CORRIGIDA: Esta é a div onde a tabela será inserida. -->
-            <!-- O ID é claro e único: "asset-list-container" -->
+            <!-- Área onde a tabela será gerada via JavaScript -->
+            <!-- O ID "asset-list-container" será usado para injetar a lista dinamicamente -->
             <div id="asset-list-container">
                 <p>Carregando equipamentos...</p>
             </div>
 
+            <!-- Link para voltar à página de serviços -->
             <div class="voltar">
                 <a href="servicos.html">← Voltar aos Serviços</a>
             </div>
         </section>
     </main>
 
+    <!-- Rodapé fixo no final da página -->
     <footer>
         <div class="container">
             <p>© 2025 DotEnd - Gerenciamento de Ativos de TI.</p>
         </div>
     </footer>
 
-    <!-- LOCAL CORRETO: O script é a última coisa antes de fechar o </body> -->
+    <!-- Importa o script que carrega e manipula a lista de equipamentos -->
+    <!-- O uso de "type=module" permite a importação de outros módulos ES6 -->
     <script type="module" src="js/lista.js"></script>
 </body>
 </html>

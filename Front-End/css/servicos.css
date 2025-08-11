@@ -1,43 +1,71 @@
 /* css/servicos.css */
 
+/* Título principal da página dentro da classe .page-title */
 .page-title h2 {
+    /* Tamanho da fonte maior para destaque */
     font-size: 2.2rem;
+    /* Cor do texto para títulos, definida por variável CSS */
     color: var(--cor-texto-headings);
 }
 
+/* Container que agrupa os cards */
 .cards {
+    /* Usa grid para layout responsivo */
     display: grid;
+    /* Colunas automáticas, cada uma com largura mínima de 300px e máxima de 1fr */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Espaçamento entre os cards */
     gap: 1.5rem;
+    /* Margem superior para separar do título */
     margin-top: 2rem;
 }
 
+/* Estilo individual para cada card */
 .card {
+    /* Fundo claro para o card */
     background-color: var(--cor-fundo-secao-clara);
+    /* Espaçamento interno amplo */
     padding: 2rem;
+    /* Bordas arredondadas médias */
     border-radius: var(--border-radius-md);
+    /* Sombra leve para dar profundidade */
     box-shadow: var(--sombra-card-leve);
+    /* Transição suave para transformações e sombras no hover */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Efeito ao passar o mouse sobre o card */
 .card:hover {
+    /* Eleva o card para cima */
     transform: translateY(-5px);
+    /* Sombra mais intensa para destaque */
     box-shadow: var(--sombra-hover);
 }
 
+/* Título dentro do card */
 .card h2 {
+    /* Fonte específica para títulos definida pela variável */
     font-family: var(--font-titulos);
+    /* Cor principal da paleta */
     color: var(--cor-principal);
+    /* Remove margem superior para alinhamento */
     margin-top: 0;
+    /* Tamanho da fonte do título */
     font-size: 1.5rem;
 }
 
+/* Parágrafo dentro do card */
 .card p {
+    /* Espaçamento inferior para separar de elementos seguintes */
     margin-bottom: 1.5rem;
 }
 
+/* Botão desabilitado dentro do card */
 .card .btn.disabled {
+    /* Cor cinza clara para indicar desabilitado */
     background-color: #ccc;
+    /* Borda combinando */
     border-color: #ccc;
+    /* Cursor que indica que não é clicável */
     cursor: not-allowed;
 }

@@ -1,30 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <!-- Configuração de codificação e responsividade -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título da aba do navegador -->
     <title>DotEnd - Gerenciamento Inteligente de Ativos de TI</title>
+
+    <!-- Arquivos CSS locais -->
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/index.css">
+
+    <!-- Biblioteca de ícones Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <!-- Cabeçalho principal da página -->
     <header class="header-principal homepage-header">
         <div class="container">
-            <a href="index.html" class="logo-link"> <img src="Images\DotEndLogo.jpg" alt="DotEnd Logo" class="logo">
-                <span class="logo-text">DotEnd</span> </a>
+            <!-- Logo e link para a página inicial -->
+            <a href="index.html" class="logo-link">
+                <img src="Images\DotEndLogo.jpg" alt="DotEnd Logo" class="logo">
+                <span class="logo-text">DotEnd</span>
+            </a>
+
+            <!-- Menu de navegação -->
             <nav class="main-nav">
                 <ul>
-                    <li><a href="index.html" class="active">Home</a></li> <li><a href="#proposta">Proposta</a></li> <li><a href="#recursos">Recursos</a></li>
-                    <li><a href="#diferenciais">Diferenciais</a></li> <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#proposta">Proposta</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#diferenciais">Diferenciais</a></li>
+                    <li><a href="servicos.html">Serviços</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
+
+            <!-- Botão de login -->
             <a href="#" class="btn btn-login">Login</a>
         </div>
     </header>
 
     <main>
+        <!-- Seção inicial de destaque (hero) -->
         <section id="hero" class="hero-section">
             <div class="hero-shape hero-shape-1"></div>
             <div class="hero-shape hero-shape-2"></div>
@@ -39,11 +58,12 @@
                     </div>
                 </div>
                 <div class="hero-image-container">
-                    <img src="Images\dotend-img02.png" alt="Gerenciamento de Ativos de TI" class="hero-image"> 
-                </div> 
+                    <img src="Images\dotend-img02.png" alt="Gerenciamento de Ativos de TI" class="hero-image">
+                </div>
             </div>
         </section>
 
+        <!-- Seção da proposta de valor -->
         <section id="proposta" class="proposta-section section-padding">
             <div class="container">
                 <div class="section-title">
@@ -68,17 +88,19 @@
             </div>
         </section>
 
+        <!-- Seção de recursos -->
         <section id="recursos" class="features-section section-padding">
             <div class="container">
                 <div class="section-title">
                     <h2>Recursos Essenciais para Você</h2>
                     <p>Ferramentas poderosas e fáceis de usar para um gerenciamento de TI eficaz.</p>
                 </div>
-                <div id="dynamic-features-cards" class="features-grid-container">
-                    </div>
+                <!-- Conteúdo carregado dinamicamente via JavaScript -->
+                <div id="dynamic-features-cards" class="features-grid-container"></div>
             </div>
         </section>
 
+        <!-- Seção de diferenciais -->
         <section id="diferenciais" class="diferenciais-section section-padding">
             <div class="container">
                 <div class="section-title">
@@ -91,42 +113,44 @@
                             <i class="fas fa-lightbulb"></i>
                         </div>
                         <h3>Interface Intuitiva</h3>
-                        <p>Design limpo e navegação simplificada para que você encontre o que precisa rapidamente, sem curvas de aprendizado íngremes.</p>
+                        <p>Design limpo e navegação simplificada para que você encontre o que precisa rapidamente.</p>
                     </div>
                     <div class="diferencial-item">
                         <div class="diferencial-icon-wrapper">
                             <i class="fas fa-cogs"></i>
                         </div>
                         <h3>Foco no Essencial</h3>
-                        <p>Concentramos nas funcionalidades chave que realmente importam para um gerenciamento de ativos eficiente, sem complexidade desnecessária.</p>
+                        <p>Funcionalidades chave que realmente importam para um gerenciamento eficiente.</p>
                     </div>
                     <div class="diferencial-item">
                         <div class="diferencial-icon-wrapper">
                             <i class="fas fa-shield-alt"></i>
                         </div>
                         <h3>Segurança e Confiabilidade</h3>
-                        <p>Seus dados de ativos são importantes. Utilizamos práticas modernas para garantir a segurança e a integridade das suas informações.</p>
+                        <p>Práticas modernas para proteger e manter a integridade dos dados.</p>
                     </div>
-                     <div class="diferencial-item">
+                    <div class="diferencial-item">
                         <div class="diferencial-icon-wrapper">
                             <i class="fas fa-rocket"></i>
                         </div>
                         <h3>Pronto para o Futuro</h3>
-                        <p>Desenvolvido com tecnologias atuais, o DotEnd está preparado para evoluir e se adaptar às novas demandas do gerenciamento de TI.</p>
+                        <p>Desenvolvido com tecnologias atuais e preparado para evoluir.</p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Seção de call-to-action -->
         <section id="cta" class="cta-section section-padding">
             <div class="container">
                 <h2>Pronto para Simplificar a Gestão dos Seus Ativos de TI?</h2>
-                <p>Experimente a diferença que o DotEnd pode fazer na sua organização. Entre em contato ou explore nossos serviços.</p>
+                <p>Experimente a diferença que o DotEnd pode fazer na sua organização.</p>
                 <a href="servicos.html" class="btn btn-primary btn-cta">Ver Nossos Serviços</a>
                 <a href="#contato" class="btn btn-light btn-cta">Fale Conosco</a>
             </div>
         </section>
 
+        <!-- Seção de contato -->
         <section id="contato" class="contact-section section-padding">
             <div class="container">
                  <div class="section-title">
@@ -140,7 +164,7 @@
                     <div class="form-group">
                         <input type="email" name="email" placeholder="Seu Melhor Email" required>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <input type="text" name="subject" placeholder="Assunto" required>
                     </div>
                     <div class="form-group full-width">
@@ -154,10 +178,12 @@
         </section>
     </main>
 
+    <!-- Rodapé -->
     <footer>
         <p>© <span id="currentYear"></span> DotEnd - Gerenciamento de Ativos de TI. Todos os direitos reservados.</p>
     </footer>
 
+    <!-- Script principal em módulo -->
     <script type="module" src="js/main.js"></script>
 </body>
 </html>

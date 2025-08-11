@@ -1,71 +1,84 @@
-/* css/formularios.css */
+/* ===========================
+   CSS para formulários gerais
+   =========================== */
 
+/* Define estilo para o título das páginas de formulário */
 .page-title {
-    text-align: center;
-    margin-bottom: 2rem;
+    text-align: center; /* Centraliza o texto */
+    margin-bottom: 2rem; /* Espaço inferior */
 }
 
+/* Container principal de formulários e formulário de contato */
 .formulario-container,
-.contact-section .container { /* Reutiliza o estilo do formulário de contato */
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: var(--cor-fundo-secao-clara);
-    padding: 2rem 3rem;
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--sombra-padrao);
+.contact-section .container { /* Reaproveita o mesmo estilo do formulário de contato */
+    max-width: 800px; /* Limita largura máxima */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: var(--cor-fundo-secao-clara); /* Usa cor de fundo definida no tema */
+    padding: 2rem 3rem; /* Espaçamento interno */
+    border-radius: var(--border-radius-md); /* Arredondamento das bordas */
+    box-shadow: var(--sombra-padrao); /* Sombra padrão do tema */
 }
 
+/* Formulários com espaçamento entre elementos */
 .formulario, #asset-form {
-    display: grid;
-    gap: 1.5rem;
+    display: grid; /* Layout em grid */
+    gap: 1.5rem; /* Espaço entre os elementos */
 }
 
+/* ===========================
+   Estilos para campos do formulário
+   =========================== */
 
-/* Estilos para os campos do formulário */
+/* Agrupamento de label e campo */
 .form-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Coloca label acima do campo */
 }
 
+/* Estilo para labels */
 .form-group label,
 .formulario label {
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--cor-texto-headings);
+    margin-bottom: 0.5rem; /* Espaço abaixo do texto */
+    font-weight: 500; /* Peso da fonte */
+    color: var(--cor-texto-headings); /* Cor definida no tema */
 }
 
+/* Campos de texto, selects e textareas */
 .form-group input,
 .form-group select,
 .form-group textarea,
 .formulario input,
 .formulario select,
 .formulario textarea {
-    width: 100%;
-    padding: 1rem;
-    border-radius: var(--border-radius-sm);
-    border: 1px solid var(--cor-header-borda);
-    font-family: inherit;
+    width: 100%; /* Ocupa largura total */
+    padding: 1rem; /* Espaçamento interno */
+    border-radius: var(--border-radius-sm); /* Bordas levemente arredondadas */
+    border: 1px solid var(--cor-header-borda); /* Borda com cor do tema */
+    font-family: inherit; /* Mantém fonte do site */
     font-size: 1rem;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Inclui padding e borda no cálculo da largura */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transições suaves ao focar */
 }
 
+/* Efeito ao focar nos campos */
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus,
 .formulario input:focus,
 .formulario select:focus,
 .formulario textarea:focus {
-    border-color: var(--cor-principal);
-    box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.15);
-    outline: none;
+    border-color: var(--cor-principal); /* Muda cor da borda */
+    box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.15); /* Sombra suave de destaque */
+    outline: none; /* Remove borda padrão do navegador */
 }
 
+/* Campo que deve ocupar toda a largura do grid */
 .form-group.full-width {
-    grid-column: 1 / -1;
+    grid-column: 1 / -1; /* Ocupa todas as colunas */
 }
 
+/* Estilo específico para o botão de envio no formulário de ativos */
 #asset-form button {
-    justify-self: start; /* Alinha o botão ao início no grid */
-    min-width: 200px;
+    justify-self: start; /* Alinha à esquerda dentro do grid */
+    min-width: 200px; /* Largura mínima para o botão */
 }

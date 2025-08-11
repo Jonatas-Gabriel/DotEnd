@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>.END - Alocação de Equipamentos</title>
+    <!-- Define o tipo de documento como HTML5 -->
+    <meta charset="UTF-8"> <!-- Define o conjunto de caracteres como UTF-8 para suportar acentuação -->
+    <title>.END - Alocação de Equipamentos</title> <!-- Título exibido na aba do navegador -->
+
+    <!-- Folhas de estilo (CSS) para o layout global e para a página específica de alocação -->
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/cadastro_alocar_equipamentos.css">
 </head>
 <body>
+    <!-- Cabeçalho principal do site -->
     <header class="header-principal">
         <div class="container">
+            <!-- Logo do site, com link para a página inicial -->
             <a href="index.html" class="logo-link">
                 <span class="logo-text">DotEnd</span>
             </a>
+
+            <!-- Menu de navegação principal -->
             <nav class="main-nav">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="servicos.html">Serviços</a></li>
+                    <li><a href="index.html">Home</a></li> <!-- Link para a página inicial -->
+                    <li><a href="servicos.html">Serviços</a></li> <!-- Link para a página de serviços -->
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- Conteúdo principal da página -->
     <main class="container section-padding">
         <section class="formulario-container">
+            <!-- Título da seção -->
             <h2>Alocação de Equipamentos</h2>
 
+            <!-- Formulário para seleção e alocação de equipamento -->
             <form class="formulario">
+                <!-- Campo de seleção de equipamento -->
                 <label for="equipamento">Selecione o Equipamento:</label>
                 <select id="equipamento" name="equipamento" required>
                     <option value="">Selecione...</option>
@@ -33,18 +44,22 @@
                     <option value="monitor">Monitor 002</option>
                 </select>
 
+                <!-- Campo para digitar a nova localização -->
                 <label for="localizacao">Nova Localização:</label>
                 <input type="text" id="localizacao" name="localizacao" required>
 
+                <!-- Botão para enviar o formulário -->
                 <button type="submit" class="btn btn-primary">Alocar Equipamento</button>
             </form>
 
+            <!-- Link para voltar à página de serviços -->
             <div class="voltar">
                 <a href="servicos.html">← Voltar aos Serviços</a>
             </div>
         </section>
     </main>
 
+    <!-- Rodapé da página -->
     <footer>
         <div class="container">
             <p>© 2025 DotEnd - Gerenciamento de Ativos de TI.</p>

@@ -1,36 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>.END - Cadastro de Dispositivo</title>
+    <!-- Define o tipo de documento como HTML5 -->
+    <meta charset="UTF-8"> <!-- Garante suporte a caracteres acentuados -->
+    <title>.END - Cadastro de Dispositivo</title> <!-- Título que aparece na aba do navegador -->
+
+    <!-- Estilos globais -->
     <link rel="stylesheet" href="css/global.css">
-    <!-- Se você criou um CSS para formulários, o link deve ser para ele -->
+
+    <!-- Estilos específicos para formulários -->
     <link rel="stylesheet" href="css/formularios.css"> 
 </head>
 <body>
+    <!-- Cabeçalho principal -->
     <header class="header-principal">
         <div class="container">
+            <!-- Logo com link para página inicial -->
             <a href="index.html" class="logo-link">
                 <span class="logo-text">DotEnd</span>
             </a>
+
+            <!-- Menu de navegação -->
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.html">Home</a></li>
+                    <!-- Link ativo indica que estamos na página de Serviços -->
                     <li><a href="servicos.html" class="active">Serviços</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
+    <!-- Conteúdo principal -->
     <main class="container section-padding">
         <section class="formulario-container">
             <h2>Cadastro de Dispositivo</h2>
 
-            <!-- A classe "formulario" foi trocada por id="asset-form" para maior consistência -->
+            <!-- Formulário principal de cadastro -->
+            <!-- ID 'asset-form' usado para manipulação no JavaScript -->
             <form id="asset-form">
+                
+                <!-- Campo para selecionar o tipo de dispositivo -->
                 <div class="form-group">
                     <label for="assetType">Tipo de Dispositivo:</label>
-                    <!-- Os 'value's foram corrigidos para corresponder às chaves do db.json -->
+                    <!-- Valores (value) correspondem a chaves do banco de dados -->
                     <select id="assetType" name="type" required>
                         <option value="">Selecione o Tipo...</option>
                         <option value="Computer">Máquina (Computador)</option>
@@ -45,24 +58,28 @@
                     </select>
                 </div>
 
+                <!-- Campo para nome ou modelo do dispositivo -->
                 <div class="form-group">
                     <label for="assetName">Nome/Modelo:</label>
                     <input type="text" id="assetName" name="name" required>
                 </div>
 
+                <!-- Campo para descrição adicional -->
                 <div class="form-group">
                     <label for="assetDescription">Descrição:</label>
                     <textarea id="assetDescription" name="description" rows="4"></textarea>
                 </div>
 
+                <!-- Campo para número de série (opcional) -->
                 <div class="form-group">
                     <label for="assetModel">Número de Série (Opcional):</label>
                     <input type="text" id="assetModel" name="model">
                 </div>
 
+                <!-- Campo para selecionar o status do dispositivo -->
                 <div class="form-group">
                     <label for="assetStatus">Status:</label>
-                     <select id="assetStatus" name="status" required>
+                    <select id="assetStatus" name="status" required>
                         <option value="Available">Disponível</option>
                         <option value="In Use">Em Uso</option>
                         <option value="Under Maintenance">Em Manutenção</option>
@@ -70,20 +87,25 @@
                     </select>
                 </div>
 
+                <!-- Botão para envio do formulário -->
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
             </form>
 
+            <!-- Link para voltar à página de serviços -->
             <div class="voltar">
                 <a href="servicos.html">← Voltar aos Serviços</a>
             </div>
         </section>
     </main>
 
+    <!-- Rodapé -->
     <footer>
         <div class="container">
             <p>© 2025 DotEnd - Gerenciamento de Ativos de TI.</p>
         </div>
     </footer>
+
+    <!-- Script JavaScript para tratar o envio do formulário -->
     <script type="module" src="js/cadastro.js"></script>
 </body>
 </html>

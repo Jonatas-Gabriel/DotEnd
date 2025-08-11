@@ -1,130 +1,196 @@
 /* css/lista.css */
 
+/* Container principal da seção da lista de ativos */
 #asset-list-section {
+    /* Cor de fundo clara definida pela variável CSS */
     background-color: var(--cor-fundo-secao-clara);
+    /* Espaçamento interno ao redor do conteúdo */
     padding: 2rem;
+    /* Bordas arredondadas médias */
     border-radius: var(--border-radius-md);
+    /* Sombra padrão para dar profundidade */
     box-shadow: var(--sombra-padrao);
 }
 
+/* Controles de filtro (labels e selects alinhados) */
 .filter-controls {
+    /* Espaço abaixo do grupo para separar da tabela */
     margin-bottom: 20px;
+    /* Usando flexbox para alinhar os elementos horizontalmente */
     display: flex;
     align-items: center;
+    /* Espaçamento fixo entre os elementos */
     gap: 10px;
 }
 
+/* Estilo para os labels dentro do filtro */
 .filter-controls label {
+    /* Peso da fonte médio para melhor legibilidade */
     font-weight: 500;
 }
 
+/* Estilo para os selects dentro do filtro */
 .filter-controls select {
+    /* Espaçamento interno para melhor clique e visual */
     padding: 8px;
+    /* Bordas arredondadas pequenas */
     border-radius: var(--border-radius-sm);
+    /* Borda cinza clara */
     border: 1px solid #ccc;
 }
 
-/* Estilos para a tabela de ativos */
+/* Estilos da tabela de ativos */
 .asset-table {
+    /* Tabela ocupa 100% da largura do container pai */
     width: 100%;
+    /* Remove espaços entre bordas da tabela */
     border-collapse: collapse;
+    /* Margem superior para separar do filtro */
     margin-top: 20px;
+    /* Sombra leve para destaque */
     box-shadow: var(--sombra-card-leve);
+    /* Bordas arredondadas médias */
     border-radius: var(--border-radius-md);
+    /* Esconde overflow para que as bordas arredondadas funcionem corretamente */
     overflow: hidden;
 }
 
+/* Cabeçalho da tabela */
 .asset-table thead th {
+    /* Cor de fundo principal definida pela variável */
     background-color: var(--cor-principal);
+    /* Cor do texto clara para contraste */
     color: var(--cor-texto-claro);
+    /* Espaçamento interno */
     padding: 15px;
+    /* Alinhamento do texto à esquerda */
     text-align: left;
+    /* Negrito mais forte */
     font-weight: 600;
 }
 
+/* Linhas do corpo da tabela */
 .asset-table tbody tr {
+    /* Fundo claro */
     background-color: var(--cor-fundo-secao-clara);
+    /* Linha de divisão inferior */
     border-bottom: 1px solid var(--cor-header-borda);
+    /* Transição suave para efeito hover */
     transition: background-color 0.3s ease;
 }
 
+/* Remove a borda da última linha para melhor acabamento */
 .asset-table tbody tr:last-child {
     border-bottom: none;
 }
 
+/* Efeito hover nas linhas para indicar foco */
 .asset-table tbody tr:hover {
+    /* Fundo mais claro da cor principal */
     background-color: var(--cor-principal-light);
 }
 
+/* Células da tabela */
 .asset-table tbody td {
+    /* Espaçamento interno */
     padding: 15px;
+    /* Cor do texto dos parágrafos */
     color: var(--cor-texto-paragrafo);
+    /* Tamanho de fonte levemente menor */
     font-size: 0.95rem;
 }
 
-/* Estilos para o modal de edição */
+/* Estilos do modal de edição */
+
+/* Modal inicialmente escondido */
 #edit-modal {
     display: none;
+    /* Posição fixa para cobrir toda a tela */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    /* Fundo escuro semi-transparente */
     background: rgba(0,0,0,0.5);
+    /* Centraliza conteúdo com flexbox */
     justify-content: center;
     align-items: center;
+    /* Garante que o modal fique acima de outros elementos */
     z-index: 1001;
 }
 
+/* Container interno do modal */
 #edit-modal > div {
+    /* Fundo branco para o conteúdo */
     background: white;
+    /* Espaçamento interno */
     padding: 30px;
+    /* Bordas arredondadas médias */
     border-radius: var(--border-radius-md);
+    /* Largura fixa com limite máximo */
     width: 400px;
     max-width: 90%;
+    /* Sombra para destacar modal */
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
+/* Título do modal */
 #edit-modal h3 {
+    /* Remove margem superior para alinhamento */
     margin-top: 0;
+    /* Cor para títulos */
     color: var(--cor-texto-headings);
 }
 
+/* Grupos de formulário dentro do modal */
 #edit-modal .form-group {
+    /* Espaçamento inferior para separar os campos */
     margin-bottom: 15px;
 }
 
+/* Campos de entrada e seleção dentro do modal */
 #edit-modal input[type="text"],
 #edit-modal select,
 #edit-modal input,
 #edit-modal textarea {
+    /* Largura total para preencher o container */
     width: 100%;
+    /* Espaçamento interno */
     padding: 10px;
+    /* Considera padding e bordas no cálculo da largura */
     box-sizing: border-box;
 }
 
+/* Botões do modal */
 #edit-modal button {
+    /* Espaço superior para separar dos campos */
     margin-top: 10px;
+    /* Espaço entre botões */
     margin-right: 10px;
 }
 
-/* Ajustes de responsividade para a tabela */
+/* Responsividade para dispositivos com largura menor que 768px */
 @media (max-width: 768px) {
+    /* Oculta o cabeçalho da tabela para layout mobile */
     .asset-table thead {
         display: none;
     }
 
+    /* Transforma a tabela e seus elementos em blocos para layout vertical */
     .asset-table, .asset-table tbody, .asset-table tr, .asset-table td {
         display: block;
         width: 100%;
     }
 
+    /* Estiliza cada linha da tabela para parecer um card */
     .asset-table tr {
         margin-bottom: 15px;
         border: 1px solid var(--cor-header-borda);
         border-radius: var(--border-radius-md);
     }
 
+    /* Células alinhadas à direita com espaço reservado para labels */
     .asset-table td {
         text-align: right;
         padding-left: 50%;
@@ -132,19 +198,29 @@
         border-bottom: 1px solid var(--cor-header-borda);
     }
 
+    /* Remove a borda inferior da última célula para melhor visual */
     .asset-table td:last-child {
         border-bottom: 0;
     }
 
+    /* Pseudo-elemento para mostrar o label da coluna na célula */
     .asset-table td::before {
+        /* Conteúdo pegando do atributo data-label */
         content: attr(data-label);
+        /* Posicionamento absoluto à esquerda */
         position: absolute;
         left: 10px;
+        /* Largura para o label */
         width: 45%;
+        /* Espaçamento entre label e conteúdo */
         padding-right: 10px;
+        /* Evita quebra de linha */
         white-space: nowrap;
+        /* Alinha texto à esquerda */
         text-align: left;
+        /* Negrito */
         font-weight: 600;
+        /* Cor para títulos */
         color: var(--cor-texto-headings);
     }
 }

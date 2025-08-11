@@ -1,20 +1,24 @@
-/* css/index.css */
-
-/* Hero Section */
+/* ===========================
+   HERO SECTION
+   ===========================
+   Área principal de destaque da página inicial.
+   Utiliza imagem de fundo, formas decorativas e layout responsivo.
+*/
 .hero-section {
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px); /* altura total da tela menos o cabeçalho */
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* centraliza verticalmente */
+    justify-content: center; /* centraliza horizontalmente */
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* esconde elementos que saem da área */
     background-image: url(../Images/Gemini_Generated_Image_saftonsaftonsaft.png);
-    background-size: cover;
+    background-size: cover; /* cobre toda a área */
     background-position: center;
     background-repeat: no-repeat;
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.4);
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.4); /* escurece a imagem */
 }
 
+/* Formas decorativas circulares que sobrepõem o fundo */
 .hero-shape {
     position: absolute;
     border-radius: 50%;
@@ -30,18 +34,21 @@
     bottom: -150px; right: -150px;
 }
 
+/* Conteúdo do hero: título, texto, botões e imagem */
 .hero-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* 2 colunas */
     align-items: center;
     gap: 3rem;
     position: relative;
-    z-index: 2;
+    z-index: 2; /* fica acima das formas */
     background-color: rgba(255, 255, 255, 0.9);
     padding: 3rem;
     border-radius: var(--border-radius-md);
     box-shadow: var(--sombra-padrao);
 }
+
+/* Estilo do título */
 .hero-text h1 {
     font-family: var(--font-titulos);
     font-size: 2.8rem;
@@ -50,14 +57,25 @@
     line-height: 1.3;
     margin-bottom: 1.5rem;
 }
+
+/* Estilo do parágrafo */
 .hero-text p {
     font-size: 1.15rem;
     margin-bottom: 2.5rem;
     color: var(--cor-texto-paragrafo);
     max-width: 500px;
 }
-.hero-cta .btn { margin-right: 1rem; margin-bottom: 1rem; }
+
+/* Espaçamento entre botões */
+.hero-cta .btn {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Centraliza imagem do lado direito */
 .hero-image-container { text-align: center; }
+
+/* Estilo da imagem */
 .hero-image {
     max-width: 100%;
     height: auto;
@@ -66,20 +84,26 @@
     box-shadow: var(--sombra-card-leve);
 }
 
-
-/* Proposta Section */
+/* ===========================
+   PROPOSTA SECTION
+   ===========================
+   Apresenta a proposta da empresa/produto com imagem e texto.
+*/
 .proposta-section { background-color: var(--cor-fundo-secao-clara); }
+
 .proposta-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     align-items: center;
     gap: 3rem;
 }
+
 .proposta-image-container img {
     width: 100%;
     border-radius: var(--border-radius-lg);
     box-shadow: var(--sombra-padrao);
 }
+
 .proposta-text-content h3 {
     font-family: var(--font-titulos);
     font-size: 1.8rem;
@@ -87,30 +111,40 @@
     margin-bottom: 1rem;
     font-weight: 600;
 }
+
 .proposta-text-content p { margin-bottom: 1.5rem; }
+
 .proposta-text-content ul {
     list-style: none;
     padding-left: 0;
     margin-bottom: 2rem;
 }
+
 .proposta-text-content ul li {
     margin-bottom: 0.75rem;
     display: flex;
     align-items: center;
 }
+
 .proposta-text-content ul li i {
     color: var(--cor-principal);
     margin-right: 10px;
     font-size: 1.2em;
 }
 
-/* Features Section (Recursos) */
+/* ===========================
+   FEATURES SECTION (Recursos)
+   ===========================
+   Cards de funcionalidades com ícones e texto.
+*/
 .features-section { background-color: var(--cor-principal-light); }
+
 .features-grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
 }
+
 .feature-card {
     background-color: var(--cor-fundo-secao-clara);
     padding: 2.5rem 2rem;
@@ -120,10 +154,12 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-top: 4px solid var(--cor-principal);
 }
+
 .feature-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--sombra-hover);
 }
+
 .feature-card .feature-icon {
     font-size: 2.8rem;
     color: var(--cor-principal);
@@ -135,6 +171,7 @@
     line-height: 70px;
     border-radius: 50%;
 }
+
 .feature-card h3 {
     font-family: var(--font-titulos);
     font-size: 1.4rem;
@@ -142,22 +179,30 @@
     margin-bottom: 0.75rem;
     font-weight: 600;
 }
+
 .feature-card p {
     font-size: 0.95rem;
     line-height: 1.6;
 }
 
-/* Diferenciais Section */
+/* ===========================
+   DIFERENCIAIS SECTION
+   ===========================
+   Lista os pontos fortes com ícones circulares.
+*/
 .diferenciais-section { background-color: var(--cor-fundo-secao-clara); }
+
 .diferenciais-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
 }
+
 .diferencial-item {
     text-align: center;
     padding: 1.5rem;
 }
+
 .diferencial-icon-wrapper {
     width: 80px;
     height: 80px;
@@ -173,9 +218,11 @@
     box-shadow: 0 4px 10px rgba(0, 150, 136, 0.3);
     transition: transform 0.3s ease;
 }
+
 .diferencial-item:hover .diferencial-icon-wrapper {
     transform: scale(1.1);
 }
+
 .diferencial-item h3 {
     font-family: var(--font-titulos);
     font-size: 1.3rem;
@@ -184,21 +231,30 @@
     font-weight: 600;
 }
 
-/* CTA Section */
+/* ===========================
+   CTA SECTION (Chamada para ação)
+   ===========================
+   Área de destaque para incentivar interação.
+*/
 .cta-section {
     background-color: var(--cor-principal);
     color: var(--cor-texto-claro);
     text-align: center;
     padding: 70px 0;
 }
+
 .cta-section .section-title h2,
 .cta-section .section-title p {
     color: var(--cor-texto-claro);
 }
+
 .cta-section .section-title h2::after {
     background-color: var(--cor-texto-claro);
 }
+
 .cta-section .btn { margin: 0.5rem; }
+
+/* Botão primário claro */
 .btn-cta.btn-primary {
     background-color: var(--cor-texto-claro);
     color: var(--cor-principal);
@@ -209,6 +265,8 @@
     border-color: #f0f0f0;
     color: var(--cor-principal-hover);
 }
+
+/* Botão de borda branca */
 .btn-cta.btn-light {
     background-color: transparent;
     color: var(--cor-texto-claro);
@@ -219,9 +277,13 @@
     color: var(--cor-principal);
 }
 
-
-/* Contact Section */
+/* ===========================
+   CONTACT SECTION
+   ===========================
+   Formulário de contato centralizado.
+*/
 .contact-section { background-color: var(--cor-fundo-geral); }
+
 .contact-form {
     max-width: 700px;
     margin: 0 auto;
@@ -229,9 +291,11 @@
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
 }
+
 .form-group.full-width {
     grid-column: 1 / -1;
 }
+
 .contact-form input,
 .contact-form textarea {
     width: 100%;
@@ -243,19 +307,23 @@
     box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 .contact-form input:focus,
 .contact-form textarea:focus {
     border-color: var(--cor-principal);
     box-shadow: 0 0 0 3px rgba(0, 150, 136, 0.15);
     outline: none;
 }
+
 .contact-form button {
     width: auto;
     min-width: 200px;
 }
 
-
-/* Media Queries para a página Index */
+/* ===========================
+   MEDIA QUERIES (Responsividade)
+   ===========================
+*/
 @media (max-width: 992px) {
     .hero-content {
         grid-template-columns: 1fr;
