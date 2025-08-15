@@ -1,4 +1,6 @@
 import { api } from './api.js';
+import { API_URL, getAuthHeaders } from './api.js';
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // Procura pelo elemento usando seu ID específico. É mais rápido e seguro.
@@ -12,15 +14,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para carregar e exibir os ativos
     async function loadAssets() {
-        assetListContainer.innerHTML = '<p>Carregando equipamentos...</p>';
-        try {
-            const assets = await api.getAllAssets();
-            renderAssetList(assets);
-        } catch (error) {
-            console.error('Erro ao carregar equipamentos:', error);
-            assetListContainer.innerHTML = '<p style="color: red;">Não foi possível carregar a lista. Verifique se o servidor backend (JSON-Server) está rodando.</p>';
+    assetListContainer.innerHTML = '<p>Carregando equipamentos...</p>';
+    try {
+        const response = await fetch(`${API_URL}/api/equipamentos`, {
+            headers: getAuthHeaders() // <<-- IMPORTANTE!
+        });
+
+        if (!response.ok) {
+            // Se o token for inválido, o servidor retornará 401 ou 403
+            if (response.status === 401 || response.status === 403) {
+               window.location.href = 'login.html'; // Redireciona para o login
+            }
+            throw new Error('Falha ao carregar dados.');
         }
+
+        const assets = await response.json();
+        renderAssetList(assets);
+    } catch (error) {
+        console.error('Erro ao carregar equipamentos:', error);
+        // ... resto da função de erro
     }
+}
+
 
     // Função para renderizar a lista de ativos em uma tabela
     function renderAssetList(assets) {

@@ -1,4 +1,5 @@
-import { api } from './api.js'; 
+import { API_URL, getAuthHeaders } from './api.js';
+
 // Importa o módulo 'api' que provavelmente contém métodos para interagir com backend (ex: adicionar ativos)
 
 /*
@@ -36,22 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                // Chama a função assíncrona para adicionar o ativo via API
-                await api.addAsset(assetType, newAssetData);
+    const response = await fetch(`${API_URL}/api/equipamentos`, {
+        method: 'POST',
+        headers: getAuthHeaders(), // <<-- IMPORTANTE!
+        body: JSON.stringify(newAssetData)
+    });
 
-                // Exibe mensagem de sucesso
-                alert('Equipamento cadastrado com sucesso!');
+    if (!response.ok) throw new Error('Falha ao cadastrar.');
 
-                // Reseta o formulário para os valores iniciais
-                assetForm.reset();
-
-                // Redireciona o usuário para a página da lista de equipamentos
-                window.location.href = 'lista_equipamentos.html';
-            } catch (error) {
-                // Caso ocorra erro, loga no console e alerta o usuário
-                console.error('Erro ao cadastrar:', error);
-                alert('Falha ao cadastrar o equipamento.');
-            }
+    alert('Equipamento cadastrado com sucesso!');
+    // ... resto da lógica de sucesso
+} catch (error) {
+    alert(error.message);
+}
         });
     }
 });

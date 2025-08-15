@@ -1,57 +1,18 @@
-const API_URL = 'http://localhost:3000';
+// Front-End/js/api.js
 
-// Função para buscar todos os ativos de um tipo específico (ex: 'Computer')
-async function getAssets(type) {
-  const response = await fetch(`${API_URL}/${type}`);
-  if (!response.ok) {
-    throw new Error(`Erro ao buscar ${type}`);
-  }
-  return response.json();
+// Apague o conteúdo antigo e substitua por este:
+export const API_URL = 'http://localhost:4000'; // URL do nosso novo backend
+
+// Função auxiliar para obter o token salvo no navegador
+export function getToken() {
+  return localStorage.getItem('authToken');
 }
 
-// Função para buscar todos os ativos de todas as categorias
-async function getAllAssets() {
-  const assetTypes = ['Computer', 'Printer', 'Monitor', 'Projector', 'Scanner', 'NetworkDevice', 'StorageDevice', 'Accessories'];
-  let allAssets = [];
-
-  for (const type of assetTypes) {
-    const assets = await getAssets(type);
-    // Adiciona a propriedade 'type' a cada objeto para sabermos a que categoria ele pertence
-    const assetsWithType = assets.map(asset => ({ ...asset, type }));
-    allAssets = allAssets.concat(assetsWithType);
-  }
-  return allAssets;
+// Função auxiliar para criar os headers com o token de autorização
+export function getAuthHeaders() {
+  const token = getToken();
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  };
 }
-
-// Função para adicionar um novo ativo
-async function addAsset(type, assetData) {
-  const response = await fetch(`${API_URL}/${type}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(assetData),
-  });
-  if (!response.ok) {
-    throw new Error('Erro ao adicionar o ativo');
-  }
-  return response.json();
-}
-
-// Função para deletar um ativo
-async function deleteAsset(type, id) {
-  const response = await fetch(`${API_URL}/${type}/${id}`, {
-    method: 'DELETE',
-  });
-  if (!response.ok) {
-    throw new Error('Erro ao deletar o ativo');
-  }
-  return response.ok;
-}
-
-// Exporta as funções para serem usadas em outros scripts
-export const api = {
-  getAllAssets,
-  addAsset,
-  deleteAsset
-};

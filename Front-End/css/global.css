@@ -289,3 +289,19 @@ footer p { margin-bottom: 0.5rem; }
     .section-title h2 { font-size: 2rem; }
     .btn-lg { padding: 12px 25px; font-size: 1rem; }
 }
+/* Adicione este estilo ao seu CSS */
+.report-card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--sombra-card-leve);
+    margin-bottom: 1.5rem;
+}
+.report-card h3 {
+    margin-top: 0;
+    color: var(--cor-principal);
+}
+.report-card ul {
+    list-style: none;
+    padding: 0;
+}
