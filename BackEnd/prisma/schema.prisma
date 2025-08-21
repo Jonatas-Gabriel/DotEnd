@@ -8,23 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Accessories {
-  id          String  @id @db.VarChar(50)
-  name        String? @db.VarChar(255)
-  description String? @db.Text
-  type        String? @db.VarChar(100)
-  model       String? @db.VarChar(100)
-  status      String? @db.VarChar(100)
-}
-
-model Computer {
-  id          String  @id @db.VarChar(50)
-  name        String? @db.VarChar(255)
-  description String? @db.Text
-  type        String? @db.VarChar(100)
-  status      String? @db.VarChar(100)
-}
-
 model Equipment {
   id          String             @id @db.VarChar(50)
   category    Equipment_category
@@ -33,74 +16,25 @@ model Equipment {
   type        Equipment_type?    @default(Other)
   model       String?            @db.VarChar(100)
   status      Equipment_status?  @default(Active)
+  alocacoes   Alocacoes[]
 }
 
-model Monitor {
-  id          String  @id @db.VarChar(50)
-  name        String? @db.VarChar(255)
-  description String? @db.Text
-  type        String? @db.VarChar(100)
-  status      String? @db.VarChar(100)
-}
-
-model NetworkDevice {
-  id          String  @id @db.VarChar(50)
-  name        String? @db.VarChar(255)
-  description String? @db.Text
-  type        String? @db.VarChar(100)
-  status      String? @db.VarChar(100)
-}
-
-model Printer {
-  id          String  @id @db.VarChar(50)
-  name        String? @db.VarChar(255)
-  description String? @db.Text
-  type        String? @db.VarChar(100)
-  status      String? @db.VarChar(100)
-}
-
-model Projector {
-  id          String  @id @db.VarChar(50)
-  name        String? @db.VarChar(255)
-  description String? @db.Text
-  type        String? @db.VarChar(100)
-  status      String? @db.VarChar(100)
-}
-
-model Scanner {
-  id          String  @id @db.VarChar(50)
-  name        String? @db.VarChar(255)
-  description String? @db.Text
-  type        String? @db.VarChar(100)
-  status      String? @db.VarChar(100)
-}
-
-model StorageDevice {
-  id          String  @id @db.VarChar(50)
-  name        String? @db.VarChar(255)
-  description String? @db.Text
-  type        String? @db.VarChar(100)
-  status      String? @db.VarChar(100)
-}
-
-model alocacoes {
-  id                 Int       @id @default(autoincrement())
-  user_id            Int
-  equipamento_id     String    @db.VarChar(50)
-  equipamento_tabela String    @db.VarChar(100)
-  data_alocacao      DateTime? @default(now()) @db.Timestamp(0)
-  users              users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "alocacoes_ibfk_1")
-
-  @@index([user_id], map: "user_id")
-}
-
-model users {
+model User {
   id         Int         @id @default(autoincrement())
   username   String      @unique(map: "username") @db.VarChar(255)
   password   String      @db.VarChar(255)
   email      String?     @unique(map: "email") @db.VarChar(255)
   created_at DateTime?   @default(now()) @db.Timestamp(0)
-  alocacoes  alocacoes[]
+  alocacoes  Alocacoes[]
+}
+
+model Alocacoes {
+  id             Int       @id @default(autoincrement())
+  user           User      @relation(fields: [user_id], references: [id])
+  user_id        Int
+  equipment      Equipment @relation(fields: [equipamento_id], references: [id])
+  equipamento_id String    @db.VarChar(50)
+  data_alocacao  DateTime? @default(now()) @db.Timestamp(0)
 }
 
 enum Equipment_category {
