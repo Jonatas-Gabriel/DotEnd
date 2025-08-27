@@ -1,35 +1,45 @@
+// Front-End/js/cadastro.js (CORRIGIDO)
+
 import { API_URL, getAuthHeaders } from './api.js';
 
-// Importa o módulo 'api' que provavelmente contém métodos para interagir com backend (ex: adicionar ativos)
+// Esta função precisa de estar disponível. Se ela estiver noutro ficheiro (como auth.js), importe-a.
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 500);
+    }, 3000);
+}
 
-/*
- * Aguarda o carregamento completo do DOM para garantir que os elementos estejam disponíveis
- */
 document.addEventListener('DOMContentLoaded', () => {
-    // Seleciona o formulário com id 'asset-form'
     const assetForm = document.getElementById('asset-form');
 
-    // Se o formulário existir na página
     if (assetForm) {
-        // Adiciona um listener para o evento de submit do formulário
         assetForm.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Previna o comportamento padrão de recarregar a página
+            event.preventDefault();
 
-            // Coleta os valores dos campos do formulário
             const assetType = document.getElementById('assetType').value;
             const assetName = document.getElementById('assetName').value;
             const assetDescription = document.getElementById('assetDescription').value;
             const assetModel = document.getElementById('assetModel').value;
             const assetStatus = document.getElementById('assetStatus').value;
 
-            // Validação simples: tipo e nome são obrigatórios
             if (!assetType || !assetName) {
-                alert('Tipo e Nome do ativo são obrigatórios!');
-                return; // Para a execução se algum campo obrigatório estiver vazio
+                showToast('Tipo e Nome do ativo são obrigatórios!', 'error');
+                return;
             }
 
-            // Monta o objeto com os dados do novo ativo a ser cadastrado
+            // --- CORREÇÃO APLICADA AQUI ---
             const newAssetData = {
+                type: assetType, // A chave DEVE ser 'type' para corresponder ao backend
                 name: assetName,
                 description: assetDescription,
                 model: assetModel,
@@ -37,19 +47,27 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-    const response = await fetch(`${API_URL}/api/equipamentos`, {
-        method: 'POST',
-        headers: getAuthHeaders(), // <<-- IMPORTANTE!
-        body: JSON.stringify(newAssetData)
-    });
+                const response = await fetch(`${API_URL}/api/equipamentos`, {
+                    method: 'POST',
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify(newAssetData)
+                });
 
-    if (!response.ok) throw new Error('Falha ao cadastrar.');
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Falha ao cadastrar o equipamento.');
+                }
 
-    alert('Equipamento cadastrado com sucesso!');
-    // ... resto da lógica de sucesso
-} catch (error) {
-    alert(error.message);
-}
+                showToast('Equipamento cadastrado com sucesso!');
+                assetForm.reset();
+                setTimeout(() => {
+                    window.location.href = 'listar_equipamentos.html';
+                }, 1500);
+
+            } catch (error) {
+                console.error('Erro ao cadastrar:', error);
+                showToast(error.message, 'error');
+            }
         });
     }
 });
