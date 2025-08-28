@@ -1,21 +1,16 @@
-// Front-End/js/cadastro.js (CORRIGIDO)
+// Front-End/js/cadastro.js (CORRIGIDO PARA O NOVO SCHEMA)
 
 import { API_URL, getAuthHeaders } from './api.js';
 
-// Esta função precisa de estar disponível. Se ela estiver noutro ficheiro (como auth.js), importe-a.
 function showToast(message, type = 'success') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     toast.textContent = message;
     document.body.appendChild(toast);
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
+    setTimeout(() => { toast.classList.add('show'); }, 100);
     setTimeout(() => {
         toast.classList.remove('show');
-        setTimeout(() => {
-            document.body.removeChild(toast);
-        }, 500);
+        setTimeout(() => { document.body.removeChild(toast); }, 500);
     }, 3000);
 }
 
@@ -26,24 +21,28 @@ document.addEventListener('DOMContentLoaded', () => {
         assetForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const assetType = document.getElementById('assetType').value;
-            const assetName = document.getElementById('assetName').value;
-            const assetDescription = document.getElementById('assetDescription').value;
-            const assetModel = document.getElementById('assetModel').value;
-            const assetStatus = document.getElementById('assetStatus').value;
+            // O 'assetType' do formulário agora é a 'category'
+            const category = document.getElementById('assetType').value;
+            const name = document.getElementById('assetName').value;
+            const description = document.getElementById('assetDescription').value;
+            const model = document.getElementById('assetModel').value;
+            // O status do formulário agora precisa de corresponder ao enum (Active, Inactive, Maintenance)
+            const status = document.getElementById('assetStatus').value;
+            // O campo 'type' (Desktop, Laptop) não está no formulário, então enviaremos um valor padrão
+            const type = 'Other';
 
-            if (!assetType || !assetName) {
-                showToast('Tipo e Nome do ativo são obrigatórios!', 'error');
+            if (!category || !name) {
+                showToast('Categoria e Nome do ativo são obrigatórios!', 'error');
                 return;
             }
 
-            // --- CORREÇÃO APLICADA AQUI ---
             const newAssetData = {
-                type: assetType, // A chave DEVE ser 'type' para corresponder ao backend
-                name: assetName,
-                description: assetDescription,
-                model: assetModel,
-                status: assetStatus,
+                category,
+                name,
+                description,
+                model,
+                status,
+                type,
             };
 
             try {

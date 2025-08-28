@@ -1,10 +1,11 @@
-// BackEnd/api-server/server.js (VERSÃO FINAL E CORRIGIDA)
+// BackEnd/api-server/server.js (VERSÃO FINAL ALINHADA COM O SCHEMA)
 
 import express from 'express';
 import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
+import { randomUUID } from 'crypto'; // Para gerar IDs únicos
 import dotenv from 'dotenv';
 import authMiddleware from './authMiddleware.js';
 
@@ -12,7 +13,6 @@ dotenv.config();
 
 const app = express();
 const prisma = new PrismaClient();
-console.log(prisma);
 const PORT = process.env.PORT || 4000;
 
 // Middlewares
@@ -66,86 +66,42 @@ app.post('/auth/login', async (req, res) => {
 
 // --- ROTAS PROTEGIDAS PARA EQUIPAMENTOS ---
 
-// ROTA PARA CADASTRAR UM NOVO EQUIPAMENTO (CORRIGIDA E MAIS SEGURA)
+// ROTA PARA CADASTRAR UM NOVO EQUIPAMENTO (CORRIGIDA PARA O NOVO SCHEMA)
 app.post('/api/equipamentos', authMiddleware, async (req, res) => {
-  const { type, ...data } = req.body; // Separa o 'type' do resto dos dados
+  const { category, name, description, model, status, type } = req.body;
 
-  if (!type || !data.name || !data.status) {
-    return res.status(400).json({ message: 'Tipo, nome e status são obrigatórios.' });
+  if (!category || !name || !status) {
+    return res.status(400).json({ message: 'Categoria, nome e status são obrigatórios.' });
   }
 
   try {
-    let newEquipment;
-    const equipmentData = {
-        name: data.name,
-        description: data.description,
-        model: data.model,
-        status: data.status,
-    };
-    
-    // Abordagem explícita e segura com switch case
-    switch (type) {
-        case 'Computer':
-            newEquipment = await prisma.computer.create({ data: equipmentData });
-            break;
-        case 'Printer':
-            newEquipment = await prisma.printer.create({ data: equipmentData });
-            break;
-        case 'Projector':
-            newEquipment = await prisma.projector.create({ data: equipmentData });
-            break;
-        case 'Monitor':
-            newEquipment = await prisma.monitor.create({ data: equipmentData });
-            break;
-        case 'Scanner':
-            newEquipment = await prisma.scanner.create({ data: equipmentData });
-            break;
-        case 'NetworkDevice':
-            newEquipment = await prisma.networkDevice.create({ data: equipmentData });
-            break;
-        case 'StorageDevice':
-            newEquipment = await prisma.storageDevice.create({ data: equipmentData });
-            break;
-        case 'Accessories':
-            newEquipment = await prisma.accessories.create({ data: equipmentData });
-            break;
-        default:
-            return res.status(400).json({ message: `Tipo de equipamento inválido: ${type}` });
-    }
-    
+    const newEquipment = await prisma.equipment.create({
+      data: {
+        id: randomUUID(), // Gera um ID único, como o schema espera
+        category, // Ex: "Computer", "Printer" (deve corresponder ao enum)
+        name,
+        description,
+        model,
+        status, // Ex: "Active", "Maintenance" (deve corresponder ao enum)
+        type,   // Ex: "Desktop", "Laptop" (deve corresponder ao enum)
+      },
+    });
     res.status(201).json({ message: 'Equipamento cadastrado com sucesso!', equipment: newEquipment });
 
   } catch (error) {
     console.error('Erro ao cadastrar equipamento:', error);
+    // Erro comum do Prisma se um valor de enum for inválido
+    if (error.code === 'P2002' || error.message.includes('enum')) {
+        return res.status(400).json({ message: 'Valor inválido para categoria, tipo ou status.' });
+    }
     res.status(500).json({ message: 'Erro interno ao cadastrar o equipamento.' });
   }
 });
 
-// ROTA PARA LISTAR TODOS OS EQUIPAMENTOS (COM PRISMA)
+// ROTA PARA LISTAR TODOS OS EQUIPAMENTOS (CORRIGIDA PARA O NOVO SCHEMA)
 app.get('/api/equipamentos', authMiddleware, async (req, res) => {
     try {
-        const [computers, printers, projectors, monitors, scanners, networkDevices, storageDevices, accessories] = await Promise.all([
-            prisma.computer.findMany(),
-            prisma.printer.findMany(),
-            prisma.projector.findMany(),
-            prisma.monitor.findMany(),
-            prisma.scanner.findMany(),
-            prisma.networkDevice.findMany(),
-            prisma.storageDevice.findMany(),
-            prisma.accessories.findMany(),
-        ]);
-
-        const allEquipments = [
-            ...computers.map(item => ({ ...item, type: 'Computer' })),
-            ...printers.map(item => ({ ...item, type: 'Printer' })),
-            ...projectors.map(item => ({ ...item, type: 'Projector' })),
-            ...monitors.map(item => ({ ...item, type: 'Monitor' })),
-            ...scanners.map(item => ({ ...item, type: 'Scanner' })),
-            ...networkDevices.map(item => ({ ...item, type: 'NetworkDevice' })),
-            ...storageDevices.map(item => ({ ...item, type: 'StorageDevice' })),
-            ...accessories.map(item => ({ ...item, type: 'Accessories' })),
-        ];
-
+        const allEquipments = await prisma.equipment.findMany();
         res.json(allEquipments);
     } catch (error) {
         console.error('Erro ao buscar equipamentos:', error);
